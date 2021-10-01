@@ -228,5 +228,6 @@ correlation <- function(x, y) {
 linear_regression <- function(x, y) {
   df <- data.frame(X = x, Y = y)
   print(lm(lm(Y ~ X, data = df)))
+
 }
 
