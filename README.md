@@ -78,4 +78,5 @@ linear_regression(x = c(400, 600, 500, 600, 400, 500),
 # Đáp số: y=0.02x + 36
 ```
 
-# Giấy phép: MIT License
+# Giấy phép:
+MIT License
