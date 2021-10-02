@@ -1,4 +1,5 @@
 library(devtools)
+
 build(
   pkg = ".",
   path = "./build",
@@ -10,6 +11,7 @@ build(
 )
 
 document(pkg = ".", roclets = NULL, quiet = FALSE)
+
 
 
 
