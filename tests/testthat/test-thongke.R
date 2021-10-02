@@ -17,12 +17,18 @@ test_that("Test các trường hợp cụ thể", {
   # Đáp số: 0.52 - 0.68
   print("===================================================")
   sample_size_mean(sigma = 3, alpha = 0.1, eps = 0.5)
+  # Tìm alpha tương ứng với u_alpha mong muốn
+  sample_size_mean(sigma = 3, alpha = (1 - pnorm(1.64)) * 2, eps = 0.5)
   # Đáp số: 96.826
   print("===================================================")
   sample_size_prop_1(f = 0.64, alpha = 0.1, eps = 0.02)
+  # Tìm alpha tương ứng với u_alpha mong muốn
+  sample_size_prop_1(f = 0.64, alpha = (1 - pnorm(1.64)) * 2, eps = 0.02)
   # Đáp số: 1549.2
   print("===================================================")
   sample_size_prop_2(eps = 0.02, alpha = 0.1)
+  # Tìm alpha tương ứng với u_alpha mong muốn
+  sample_size_prop_2(eps = 0.02, alpha = (1 - pnorm(1.64)) * 2)
   # Đáp số: 1681
   print("===================================================")
   test_mean_norm(sigma = 5.2, alpha = 0.05, n = 100,
