@@ -17,8 +17,8 @@ get_alpha <- function(z_alpha, two_side = TRUE) {
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 #' @export
 estimate_mean_norm <- function(n, mean, sigma, alpha) {
-  u_alpha <- qnorm(1-alpha/2)
-  eps <- u_alpha * sigma / sqrt(n)
+  z_alpha <- qnorm(1-alpha/2)
+  eps <- z_alpha * sigma / sqrt(n)
   top <- mean + eps
   bottom <- mean - eps
   print("Bài toán: Ước lượng khoảng cho trung bình (phân bố chuẩn)")
@@ -50,8 +50,8 @@ estimate_var <- function(n, s, alpha) {
 #' Hàm này ước lượng khoảng cho tỷ lệ
 #' @export
 estimate_prop <- function(n, f, alpha) {
-  u_alpha <- qnorm(1-alpha/2)
-  eps <- u_alpha * sqrt(f * (1-f) / n)
+  z_alpha <- qnorm(1-alpha/2)
+  eps <- z_alpha * sqrt(f * (1-f) / n)
   bottom <- f - eps
   top <- f + eps
   print("Bài toán: Ước lượng khoảng cho tỷ lệ")
@@ -61,8 +61,8 @@ estimate_prop <- function(n, f, alpha) {
 #' Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.
 #' @export
 sample_size_mean <- function(sigma, eps, alpha) {
-  u_alpha <- qnorm(1-alpha/2)
-  value <- (sigma*u_alpha / eps) * (sigma*u_alpha / eps)
+  z_alpha <- qnorm(1-alpha/2)
+  value <- (sigma*z_alpha / eps) * (sigma*z_alpha / eps)
   print("Bài toán: Xác định kích thước mẫu (ước lượng trung bình)")
   printf("Kích thước mẫu tối thiểu: %.4f", value)
 }
@@ -70,8 +70,8 @@ sample_size_mean <- function(sigma, eps, alpha) {
 #' Hàm này xác đỉnh kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 1)
 #' @export
 sample_size_prop_1 <- function(f, eps, alpha) {
-  u_alpha <- qnorm(1-alpha/2)
-  value <- u_alpha*u_alpha * f*(1 - f) / (eps*eps)
+  z_alpha <- qnorm(1-alpha/2)
+  value <- z_alpha*z_alpha * f*(1 - f) / (eps*eps)
   print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, đã biết f)")
   printf("Kích thước mẫu tối thiểu: %.4f", value)
 }
@@ -79,8 +79,8 @@ sample_size_prop_1 <- function(f, eps, alpha) {
 #' Hàm này xác định kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 2)
 #' @export
 sample_size_prop_2 <- function(eps, alpha) {
-  u_alpha <- qnorm(1-alpha/2)
-  value <- u_alpha*u_alpha / (4*eps*eps)
+  z_alpha <- qnorm(1-alpha/2)
+  value <- z_alpha*z_alpha / (4*eps*eps)
   print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, chưa biết f)")
   printf("Kích thước mẫu tối thiểu: %.4f", value)
 }
