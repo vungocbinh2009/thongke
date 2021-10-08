@@ -293,3 +293,12 @@ linear_regression <- function(x, y) {
   printf("Hệ số ứng với x: %.4f", result$coefficients[2])
 }
 
+#' Hàm này thực hiện việc dự đoán giá trị trong bài toán hồi quy tuyến tính đơn.
+#' @export
+linear_regression_predict <- function(x, y, value) {
+  df <- data.frame(X = x, Y = y)
+  result <- lm(Y ~ X, data = df)
+  printf("Bài toán: Dự báo giá trị, dựa vào hồi quy tuyến tính đơn")
+  printf("Giá trị của Y là: %.4f", result$coefficients[1] + value * result$coefficients[2])
+}
+
