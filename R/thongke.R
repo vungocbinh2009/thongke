@@ -190,7 +190,7 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
 #' @export
 test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq") {
   s <- ((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2)
-  test <- (mean1 - mean2) / (s * sqrt(1/n1 + 1/n2))
+  test <- (mean1 - mean2) / (sqrt(s) * sqrt(1/n1 + 1/n2))
   print("Bài toán: So sánh 2 giá trị trung bình (phân bố Student)")
   printf("Kết quả test thống kê: %.4f", test)
   c <- switch(
