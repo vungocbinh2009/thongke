@@ -1,3 +1,4 @@
+#' File này bao gồm các hàm dùng để tính toán kết quả các bài toán mà người dùng hay gặp phải
 printf <- function (...) {
   print(sprintf(...))
 }
