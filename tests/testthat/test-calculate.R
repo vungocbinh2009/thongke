@@ -16,18 +16,12 @@ test_that("Test các trường hợp cụ thể", {
   estimate_prop(n = 100, f = 0.6, alpha = 0.1)
   # Đáp số: 0.52 - 0.68
   print("===================================================")
-  sample_size_mean(sigma = 3, alpha = 0.1, eps = 0.5)
-  # Tìm alpha tương ứng với u_alpha mong muốn
   sample_size_mean(sigma = 3, alpha = get_alpha(1.64), eps = 0.5)
   # Đáp số: 96.826
   print("===================================================")
-  sample_size_prop_1(f = 0.64, alpha = 0.1, eps = 0.02)
-  # Tìm alpha tương ứng với u_alpha mong muốn
   sample_size_prop_1(f = 0.64, alpha = get_alpha(1.64), eps = 0.02)
   # Đáp số: 1549.2
   print("===================================================")
-  sample_size_prop_2(eps = 0.02, alpha = 0.1)
-  # Tìm alpha tương ứng với u_alpha mong muốn
   sample_size_prop_2(eps = 0.02, alpha = get_alpha(1.64))
   # Đáp số: 1681
   print("===================================================")
