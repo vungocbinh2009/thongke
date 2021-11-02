@@ -1,4 +1,5 @@
 #' File này bao gồm các hàm dùng để tính toán kết quả các bài toán mà người dùng hay gặp phải
+
 printf <- function (...) {
   print(sprintf(...))
 }
@@ -51,6 +52,11 @@ estimate_var <- function(n, s, alpha) {
 #' Hàm này ước lượng khoảng cho tỷ lệ
 #' @export
 estimate_prop <- function(n, f, alpha) {
+  if(!check_estimate_prop(n, f)) {
+    print("Không đủ điều kiện áp dụng test thống kê")
+    return()
+  }
+
   z_alpha <- qnorm(1-alpha/2)
   eps <- z_alpha * sqrt(f * (1-f) / n)
   bottom <- f - eps
@@ -132,6 +138,11 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq") {
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' @export
 test_prop <- function(n, f, p_0, alpha, mode="neq") {
+  if(!check_test_prop(n, p_0)) {
+    print("Không đủ điều kiện áp dụng test thống kê")
+    return()
+  }
+
   test <- (f - p_0) * sqrt(n) / sqrt(p_0 * (1-p_0))
   print("Bài toán: Kiểm định giả thiết cho tỷ lệ")
   printf("Kết quả test thống kê: %.4f", test)
@@ -212,6 +223,11 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq") {
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' @export
 test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq") {
+  if(!check_test_2_prop(n1, n2, f1, f2)) {
+    print("Không đủ điều kiện áp dụng test thống kê")
+    return()
+  }
+
   f <- (f1*n1 + f2*n2) / (n1+n2)
   test <- (f1 - f2) / sqrt(f*(1-f)*(1/n1 + 1/n2))
   print("Bài toán: So sánh 2 tỷ lệ")
@@ -235,6 +251,11 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq") {
 #' nào đó và tổng số quan sát trong các tập tổng thể.
 #' @export
 test_n_prop <- function(m_i, n_i, alpha) {
+  if(!check_test_n_prop(m_i, n_i)) {
+    print("Không đủ điều kiện áp dụng test thống kê")
+    return()
+  }
+
   sum_n_i <- sum(n_i)
   sum_m_i <- sum(m_i)
   sum_l_i <- sum_n_i - sum_m_i
@@ -255,6 +276,11 @@ test_n_prop <- function(m_i, n_i, alpha) {
 #' (Contingency Table)
 #' @export
 test_independent <- function(matrix, alpha) {
+  if(!check_test_independent(matrix)) {
+    print("Không đủ điều kiện áp dụng test thống kê")
+    return()
+  }
+
   row_sums <- rowSums(matrix)
   col_sums <- colSums(matrix)
   n <- sum(row_sums)
@@ -303,3 +329,41 @@ linear_regression_predict <- function(x, y, value) {
   printf("Giá trị của Y là: %.4f", result$coefficients[1] + value * result$coefficients[2])
 }
 
+#'Các hàm dưới đây kiểm tra xem dữ liệu đầu vào có đủ điều kiện để tính toán hay không ?
+
+check_estimate_prop <- function (n, f) {
+  return(n*f > 10 && n*(1-f) > 10)
+}
+
+check_test_prop <- function (n, p0) {
+  return(n*p0 >= 5 && n*(1-p0) >= 5)
+}
+
+check_test_2_prop <- function(n1, n2, f1, f2) {
+  f <- (f1*n1 + f2*n2) / (n1+n2)
+  n <- n1 + n2
+  return(n*f >= 10 && n*(1-f) >= 10)
+}
+
+check_test_n_prop <- function(m_i, n_i) {
+  sum_n_i <- sum(n_i)
+  sum_m_i <- sum(m_i)
+  sum_l_i <- sum_n_i - sum_m_i
+  prop_1 <- (n_i * sum_m_i) / sum_n_i
+  prop_2 <- (n_i * sum_l_i) / sum_n_i
+  return(length(prop_1[prop_1 < 5]) + length(prop_2[prop_2 < 5]) == 0)
+}
+
+check_test_independent <- function(matrix) {
+  row_sums <- rowSums(matrix)
+  col_sums <- colSums(matrix)
+  n <- sum(row_sums)
+  f <- NULL
+  for(i in seq_along(row_sums)) {
+    for(j in seq_along(col_sums)) {
+      f <- c(f, row_sums[i] * col_sums[j])
+    }
+  }
+  f <- f / n
+  return(length(f[f < 5]) == 0)
+}
