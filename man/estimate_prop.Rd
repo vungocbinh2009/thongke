@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{estimate_prop}
 \alias{estimate_prop}
-\title{Hàm này ước lượng khoảng cho tỷ lệ}
+\title{Hàm này ước lượng khoảng cho tỷ lệ
+Hàm trả về các giá trị z_alpha, bottom, top}
 \usage{
 estimate_prop(n, f, alpha)
 }
 \description{
 Hàm này ước lượng khoảng cho tỷ lệ
+Hàm trả về các giá trị z_alpha, bottom, top
 }

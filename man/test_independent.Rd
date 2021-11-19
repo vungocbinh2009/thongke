@@ -4,7 +4,9 @@
 \alias{test_independent}
 \title{Hàm này thực hiện kiểm định tính độc lập của 2 dấu hiệu A và B
 matrix là một ma trận với các phần tử n_ij nằm trong bảng liên hợp các dấu hiệu
-(Contingency Table)}
+(Contingency Table)
+Hàm trả về kết quả của test thống kê (test), giá trị c
+cùng các kết quả row_sums, col_sums và n (kích thước mẫu)}
 \usage{
 test_independent(matrix, alpha)
 }
@@ -12,4 +14,6 @@ test_independent(matrix, alpha)
 Hàm này thực hiện kiểm định tính độc lập của 2 dấu hiệu A và B
 matrix là một ma trận với các phần tử n_ij nằm trong bảng liên hợp các dấu hiệu
 (Contingency Table)
+Hàm trả về kết quả của test thống kê (test), giá trị c
+cùng các kết quả row_sums, col_sums và n (kích thước mẫu)
 }

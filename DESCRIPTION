@@ -1,6 +1,6 @@
 Package: thongke
 Title: Simple statistic package
-Version: 1.3
+Version: 1.4
 Authors@R: 
     person("Vu Ngọc", "Bình", , "vungocbinh@protonmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "no Id"))

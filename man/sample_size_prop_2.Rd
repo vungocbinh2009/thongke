@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{sample_size_prop_2}
 \alias{sample_size_prop_2}
-\title{Hàm này xác định kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 2)}
+\title{Hàm này xác định kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 2)
+Hàm trả về các giá trị z_alpha, value - kết quả của phép tính}
 \usage{
 sample_size_prop_2(eps, alpha)
 }
 \description{
 Hàm này xác định kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 2)
+Hàm trả về các giá trị z_alpha, value - kết quả của phép tính
 }

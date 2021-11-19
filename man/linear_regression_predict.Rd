@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{linear_regression_predict}
 \alias{linear_regression_predict}
-\title{Hàm này thực hiện việc dự đoán giá trị trong bài toán hồi quy tuyến tính đơn.}
+\title{Hàm này thực hiện tính và trả về kết quả dự đoán giá trị
+trong bài toán hồi quy tuyến tính đơn.}
 \usage{
 linear_regression_predict(x, y, value)
 }
 \description{
-Hàm này thực hiện việc dự đoán giá trị trong bài toán hồi quy tuyến tính đơn.
+Hàm này thực hiện tính và trả về kết quả dự đoán giá trị
+trong bài toán hồi quy tuyến tính đơn.
 }

@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{sample_size_mean}
 \alias{sample_size_mean}
-\title{Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.}
+\title{Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.
+Hàm trả về các giá trị z_alpha, value - kết quả của phép tính}
 \usage{
 sample_size_mean(sigma, eps, alpha)
 }
 \description{
 Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.
+Hàm trả về các giá trị z_alpha, value - kết quả của phép tính
 }

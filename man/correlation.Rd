@@ -2,10 +2,10 @@
 % Please edit documentation in R/thongke.R
 \name{correlation}
 \alias{correlation}
-\title{Hàm này tính hệ số tương quan.}
+\title{Hàm này tính và trả về giá trị hệ số tương quan.}
 \usage{
 correlation(x, y)
 }
 \description{
-Hàm này tính hệ số tương quan.
+Hàm này tính và trả về giá trị hệ số tương quan.
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/thongke.R
 \name{linear_regression}
 \alias{linear_regression}
-\title{Hàm này thực hiện bài toán hồi quy tuyến tính đơn}
+\title{Hàm này thực hiện bài toán hồi quy tuyến tính đơn và trả về các giá trị a, b (y = ax+b)}
 \usage{
 linear_regression(x, y)
 }
 \description{
-Hàm này thực hiện bài toán hồi quy tuyến tính đơn
+Hàm này thực hiện bài toán hồi quy tuyến tính đơn và trả về các giá trị a, b (y = ax+b)
 }

@@ -4,16 +4,12 @@
 \alias{data_simulate_regression}
 \title{Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn
 Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
-Hàm này return 2 giá trị, có thể nhận 2 giá trị này thông qua lệnh
-library(gsubfn)
-list\link{x, y} <- simulate_regression_data(...)}
+Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y}
 \usage{
 data_simulate_regression(n, min_x, max_x, b0, b1, sd_eps, round_digits)
 }
 \description{
 Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn
 Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
-Hàm này return 2 giá trị, có thể nhận 2 giá trị này thông qua lệnh
-library(gsubfn)
-list\link{x, y} <- simulate_regression_data(...)
+Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y
 }

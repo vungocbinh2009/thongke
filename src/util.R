@@ -1,3 +1,4 @@
+#' Hàm này có chức năng tương tự như hàm printf trong C
 printf <- function (...) {
   print(sprintf(...))
 }

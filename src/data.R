@@ -1,5 +1,5 @@
 #' Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
-#' Hàm sẽ in ra bảng phân bố tần số
+#' Hàm sẽ in ra bảng phân bố tần số và trả về dữ liệu được hàm tạo ra.
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
@@ -13,6 +13,7 @@ data_simulate_discrete <- function(n, mean, sd, min, max) {
 
 #' Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
 #' Hàm sẽ in ra bảng phân bố tần số ghép lớp, theo các giá trị cut cho trước
+#' Hàm cũng trả về dữ liệu dưới dạng ghép lớp (điểm giữa của các khoảng)
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
@@ -29,9 +30,7 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size) {
 
 #' Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn
 #' Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
-#' Hàm này return 2 giá trị, có thể nhận 2 giá trị này thông qua lệnh
-#' library(gsubfn)
-#' list[x, y] <- simulate_regression_data(...)
+#' Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y
 #' @export
 data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits) {
   # Tạo ngẫu nhiên dữ liệu cho các biến x_1, x_2

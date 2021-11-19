@@ -4,7 +4,9 @@
 \alias{test_n_prop}
 \title{Hàm này thưc hiện so sánh n tỷ lệ.
 m_i, n_i là các vector thể hiện số quan sát có đặc tính A
-nào đó và tổng số quan sát trong các tập tổng thể.}
+nào đó và tổng số quan sát trong các tập tổng thể.
+Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
+l (sum_l_i), N (sum_n_i)}
 \usage{
 test_n_prop(m_i, n_i, alpha)
 }
@@ -12,4 +14,6 @@ test_n_prop(m_i, n_i, alpha)
 Hàm này thưc hiện so sánh n tỷ lệ.
 m_i, n_i là các vector thể hiện số quan sát có đặc tính A
 nào đó và tổng số quan sát trong các tập tổng thể.
+Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
+l (sum_l_i), N (sum_n_i)
 }

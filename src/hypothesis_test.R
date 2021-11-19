@@ -1,5 +1,6 @@
 #' Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố chuẩn
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq") {
   test <- (mean - mean_0) * sqrt(n) / sigma
@@ -12,15 +13,13 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq") {
     "greater" = qnorm(1 - alpha)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c))
 }
 
 #' Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố student
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq") {
   test <- (mean - mean_0) * sqrt(n) / s
@@ -33,15 +32,13 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq") {
     "greater" = qt(1 - alpha, df=n-1)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c))
 }
 
 #' Hàm này kiểm định giả thiết về xác suất
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_prop <- function(n, f, p_0, alpha, mode="neq") {
   if(!check_test_prop(n, p_0)) {
@@ -59,15 +56,13 @@ test_prop <- function(n, f, p_0, alpha, mode="neq") {
     "greater" = qnorm(1 - alpha)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c))
 }
 
 #' Hàm này thực hiện kiểm định khi bình phương
 #' actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_chi_squared <- function(actual, expected, alpha) {
   test <- sum((actual - expected)*(actual - expected) / expected)
@@ -75,15 +70,13 @@ test_chi_squared <- function(actual, expected, alpha) {
   print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
   printf("Kết quả test thống kê: %.4f", test)
   printf("Kết quả của c: %.4f", c)
-  if(test > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c))
 }
 
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố chuẩn)
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="neq") {
   test <- (mean1 - mean2) / sqrt(sigma1*sigma1/n1 + sigma2*sigma2/n2)
@@ -96,15 +89,13 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
     "greater" = qnorm(1 - alpha)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c))
 }
 
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố Student)
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s
 #' @export
 test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq") {
   s <- ((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2)
@@ -118,15 +109,13 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq") {
     "greater" = qt(1 - alpha, df=n1+n2-2)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c, s = s))
 }
 
 #' Hàm này thực hiện so sánh 2 tỷ lệ
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c và tỷ lệ chung f
 #' @export
 test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq") {
   if(!check_test_2_prop(n1, n2, f1, f2)) {
@@ -145,16 +134,15 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq") {
     "greater" = qnorm(1 - alpha)
   )
   printf("Kết quả của c: %.4f", c)
-  if(abs(test) > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c, f = f))
 }
 
 #' Hàm này thưc hiện so sánh n tỷ lệ.
 #' m_i, n_i là các vector thể hiện số quan sát có đặc tính A
 #' nào đó và tổng số quan sát trong các tập tổng thể.
+#' Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
+#' l (sum_l_i), N (sum_n_i)
 #' @export
 test_n_prop <- function(m_i, n_i, alpha) {
   if(!check_test_n_prop(m_i, n_i)) {
@@ -170,16 +158,16 @@ test_n_prop <- function(m_i, n_i, alpha) {
   print("Bài toán: So sánh n tỷ lệ")
   printf("Kết quả test thống kê: %.4f", test)
   printf("Kết quả của c: %.4f", c)
-  if(test > c) {
-    print("Kết luận: Bác bỏ H0")
-  } else {
-    print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-  }
+  get_test_result(test, c)
+  return(list(test = test, c = c, sum_n_i = sum_n_i,
+              sum_m_i = sum_m_i, sum_l_i = sum_l_i))
 }
 
 #' Hàm này thực hiện kiểm định tính độc lập của 2 dấu hiệu A và B
 #' matrix là một ma trận với các phần tử n_ij nằm trong bảng liên hợp các dấu hiệu
 #' (Contingency Table)
+#' Hàm trả về kết quả của test thống kê (test), giá trị c
+#' cùng các kết quả row_sums, col_sums và n (kích thước mẫu)
 #' @export
 test_independent <- function(matrix, alpha) {
   if(!check_test_independent(matrix)) {
@@ -202,7 +190,14 @@ test_independent <- function(matrix, alpha) {
   print("Bài toán: Kiểm định tính độc lập")
   printf("Kết quả test thống kê: %.4f", test)
   printf("Kết quả của c: %.4f", c)
-  if(test > c) {
+  get_test_result(test, c)
+  return(list(test = test, c = c,
+         row_sums = row_sums, col_sums = col_sums, n = n))
+}
+
+#' Hàm này in ra kết quả của bài toán kiểm định giả thiết
+get_test_result <- function(test, c) {
+  if(abs(test) > c) {
     print("Kết luận: Bác bỏ H0")
   } else {
     print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")

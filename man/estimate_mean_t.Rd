@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{estimate_mean_t}
 \alias{estimate_mean_t}
-\title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student}
+\title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
+#' Hàm trả về các giá trị t_alpha, bottom, top}
 \usage{
 estimate_mean_t(n, mean, s, alpha)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
+#' Hàm trả về các giá trị t_alpha, bottom, top
 }

@@ -2,10 +2,12 @@
 % Please edit documentation in R/thongke.R
 \name{estimate_var}
 \alias{estimate_var}
-\title{Hàm này ước lượng khoảng cho phương sai.}
+\title{Hàm này ước lượng khoảng cho phương sai.
+Hàm trả về các giá trị chi_sq_1, chi_sq_2,, bottom, top}
 \usage{
 estimate_var(n, s, alpha)
 }
 \description{
 Hàm này ước lượng khoảng cho phương sai.
+Hàm trả về các giá trị chi_sq_1, chi_sq_2,, bottom, top
 }
