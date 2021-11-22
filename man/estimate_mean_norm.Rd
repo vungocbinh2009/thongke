@@ -5,7 +5,7 @@
 \title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 Hàm trả về các giá trị z_alpha, bottom, top}
 \usage{
-estimate_mean_norm(n, mean, sigma, alpha)
+estimate_mean_norm(n, mean, sigma, alpha, silent = FALSE)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc

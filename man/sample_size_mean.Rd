@@ -5,7 +5,7 @@
 \title{Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.
 Hàm trả về các giá trị z_alpha, value - kết quả của phép tính}
 \usage{
-sample_size_mean(sigma, eps, alpha)
+sample_size_mean(sigma, eps, alpha, silent = FALSE)
 }
 \description{
 Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.

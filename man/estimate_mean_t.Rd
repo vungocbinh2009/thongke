@@ -5,7 +5,7 @@
 \title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
 #' Hàm trả về các giá trị t_alpha, bottom, top}
 \usage{
-estimate_mean_t(n, mean, s, alpha)
+estimate_mean_t(n, mean, s, alpha, silent = FALSE)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student

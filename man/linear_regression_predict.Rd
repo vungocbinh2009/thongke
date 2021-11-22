@@ -5,7 +5,7 @@
 \title{Hàm này thực hiện tính và trả về kết quả dự đoán giá trị
 trong bài toán hồi quy tuyến tính đơn.}
 \usage{
-linear_regression_predict(x, y, value)
+linear_regression_predict(x, y, value, silent = FALSE)
 }
 \description{
 Hàm này thực hiện tính và trả về kết quả dự đoán giá trị

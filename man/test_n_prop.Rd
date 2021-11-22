@@ -8,7 +8,7 @@ nào đó và tổng số quan sát trong các tập tổng thể.
 Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
 l (sum_l_i), N (sum_n_i)}
 \usage{
-test_n_prop(m_i, n_i, alpha)
+test_n_prop(m_i, n_i, alpha, silent = FALSE)
 }
 \description{
 Hàm này thưc hiện so sánh n tỷ lệ.

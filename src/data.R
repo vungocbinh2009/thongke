@@ -3,11 +3,13 @@
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
-data_simulate_discrete <- function(n, mean, sd, min, max) {
+data_simulate_discrete <- function(n, mean, sd, min, max, silent=FALSE) {
   data <- rtruncnorm(n, a=min, b=max, mean, sd)
   data <- round(data)
   df <- data.frame(data1 = data)
-  print(table(df$data1))
+  if(!silent) {
+    print(table(df$data1))
+  }
   return(data)
 }
 
@@ -17,14 +19,15 @@ data_simulate_discrete <- function(n, mean, sd, min, max) {
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
-data_simulate_continuous <- function(n, mean, sd, min, max, size) {
+data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) {
   data <- rtruncnorm(n, a=min, b=max, mean, sd)
   df <- data.frame(data = data)
   cut_vector <- get_cut_vector(min, max, size)
   df$data.cut <- cut(df$data, breaks=cut_vector)
-  print(with(df, table(data.cut, useNA='ifany')))
-
   df$cal_data <- as.numeric(df$data.cut) * size + (min - size / 2)
+  if(!silent) {
+    print(with(df, table(data.cut, useNA='ifany')))
+  }
   return(df$cal_data)
 }
 
@@ -32,7 +35,7 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size) {
 #' Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
 #' Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y
 #' @export
-data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits) {
+data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits, silent=FALSE) {
   # Tạo ngẫu nhiên dữ liệu cho các biến x_1, x_2
   x <- runif(n, min_x, max_x)
 
@@ -48,7 +51,9 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
 
   df <- data.frame(x = x, y = y)
   df <- df[order(x),]
-  print(df)
+  if(!silent) {
+    print(df)
+  }
   return(list(x = x, y = y))
 }
 

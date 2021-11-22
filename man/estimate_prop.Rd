@@ -5,7 +5,7 @@
 \title{Hàm này ước lượng khoảng cho tỷ lệ
 Hàm trả về các giá trị z_alpha, bottom, top}
 \usage{
-estimate_prop(n, f, alpha)
+estimate_prop(n, f, alpha, silent = FALSE)
 }
 \description{
 Hàm này ước lượng khoảng cho tỷ lệ

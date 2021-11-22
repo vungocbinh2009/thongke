@@ -6,7 +6,16 @@
 Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
 Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y}
 \usage{
-data_simulate_regression(n, min_x, max_x, b0, b1, sd_eps, round_digits)
+data_simulate_regression(
+  n,
+  min_x,
+  max_x,
+  b0,
+  b1,
+  sd_eps,
+  round_digits,
+  silent = FALSE
+)
 }
 \description{
 Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn

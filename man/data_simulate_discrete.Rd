@@ -6,7 +6,7 @@
 Hàm sẽ in ra bảng phân bố tần số và trả về dữ liệu được hàm tạo ra.
 Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm}
 \usage{
-data_simulate_discrete(n, mean, sd, min, max)
+data_simulate_discrete(n, mean, sd, min, max, silent = FALSE)
 }
 \description{
 Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max

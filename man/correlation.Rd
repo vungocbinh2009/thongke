@@ -4,7 +4,7 @@
 \alias{correlation}
 \title{Hàm này tính và trả về giá trị hệ số tương quan.}
 \usage{
-correlation(x, y)
+correlation(x, y, silent = FALSE)
 }
 \description{
 Hàm này tính và trả về giá trị hệ số tương quan.

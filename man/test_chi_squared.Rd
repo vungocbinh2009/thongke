@@ -6,7 +6,7 @@
 actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
 Hàm trả về kết quả của test thống kê (test) và giá trị c}
 \usage{
-test_chi_squared(actual, expected, alpha)
+test_chi_squared(actual, expected, alpha, silent = FALSE)
 }
 \description{
 Hàm này thực hiện kiểm định khi bình phương

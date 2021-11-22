@@ -6,7 +6,17 @@
 Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 Hàm trả về kết quả của test thống kê (test) và giá trị c}
 \usage{
-test_2_mean_norm(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode = "neq")
+test_2_mean_norm(
+  n1,
+  n2,
+  mean1,
+  mean2,
+  sigma1,
+  sigma2,
+  alpha,
+  mode = "neq",
+  silent = FALSE
+)
 }
 \description{
 Hàm này so sánh 2 giá trị trung bình (dùng phân bố chuẩn)
