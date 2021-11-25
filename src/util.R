@@ -14,4 +14,3 @@ get_alpha <- function(z_alpha, two_side = TRUE) {
     return((1 - pnorm(z_alpha)))
   }
 }
-

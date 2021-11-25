@@ -39,4 +39,3 @@ check_test_independent <- function(matrix) {
   f <- f / n
   return(length(f[f < 5]) == 0)
 }
-

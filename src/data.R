@@ -66,4 +66,3 @@ get_cut_vector <- function(min, max, size) {
   }
   return(cut_vector)
 }
-

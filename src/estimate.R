@@ -104,4 +104,3 @@ sample_size_prop_2 <- function(eps, alpha, silent = FALSE) {
   }
   return(list(z_alpha = z_alpha, value = value))
 }
-

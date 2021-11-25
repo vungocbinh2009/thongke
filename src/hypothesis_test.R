@@ -226,4 +226,3 @@ get_test_result <- function(test, c) {
     print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
   }
 }
-

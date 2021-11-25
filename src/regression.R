@@ -35,4 +35,3 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
   }
   return(predict_value)
 }
-
