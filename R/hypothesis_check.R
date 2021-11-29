@@ -16,7 +16,7 @@ check_test_2_prop <- function(n1, n2, f1, f2) {
 }
 
 #' Hàm kiểm tra điều kiện để áp dụng bài toán so sánh nhiều tỷ lệ
-check_test_n_prop <- function(m_i, n_i) {
+check_test_k_prop <- function(m_i, n_i) {
   sum_n_i <- sum(n_i)
   sum_m_i <- sum(m_i)
   sum_l_i <- sum_n_i - sum_m_i

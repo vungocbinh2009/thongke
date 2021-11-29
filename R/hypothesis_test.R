@@ -67,11 +67,29 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
   return(list(test = test, c = c))
 }
 
+#' Hàm này đã Deprecated, dùng hàm test_goodness_of_fit để thay thế.
 #' Hàm này thực hiện kiểm định khi bình phương
 #' actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_chi_squared <- function(actual, expected, alpha, silent = FALSE) {
+  .Deprecated("test_goodness_of_fit")
+  test <- sum((actual - expected)*(actual - expected) / expected)
+  c <- qchisq(1 - alpha, df=length(actual)-1)
+  if(!silent) {
+    print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
+    printf("Kết quả test thống kê: %.4f", test)
+    printf("Kết quả của c: %.4f", c)
+    get_test_result(test, c)
+  }
+  return(list(test = test, c = c))
+}
+
+#' Hàm này thực hiện kiểm định khi bình phương
+#' actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
+#' Hàm trả về kết quả của test thống kê (test) và giá trị c
+#' @export
+test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
   test <- sum((actual - expected)*(actual - expected) / expected)
   c <- qchisq(1 - alpha, df=length(actual)-1)
   if(!silent) {
@@ -155,6 +173,7 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
   return(list(test = test, c = c, f = f))
 }
 
+#' Hàm này đã deprecated, thay bằng hàm test_k_prop.
 #' Hàm này thưc hiện so sánh n tỷ lệ.
 #' m_i, n_i là các vector thể hiện số quan sát có đặc tính A
 #' nào đó và tổng số quan sát trong các tập tổng thể.
@@ -162,7 +181,36 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
 #' l (sum_l_i), N (sum_n_i)
 #' @export
 test_n_prop <- function(m_i, n_i, alpha, silent = FALSE) {
-  if(!check_test_n_prop(m_i, n_i)) {
+  .Deprecated("test_k_prop")
+  if(!check_test_k_prop(m_i, n_i)) {
+    if(!silent) {
+      print("Không đủ điều kiện áp dụng test thống kê")
+    }
+    return()
+  }
+  sum_n_i <- sum(n_i)
+  sum_m_i <- sum(m_i)
+  sum_l_i <- sum_n_i - sum_m_i
+  test <- (sum_n_i * sum_n_i) / (sum_m_i * sum_l_i) * sum(m_i * m_i / n_i) - sum_n_i * sum_m_i / sum_l_i
+  c <- qchisq(1 - alpha, df=length(m_i) - 1)
+  if(!silent) {
+    print("Bài toán: So sánh n tỷ lệ")
+    printf("Kết quả test thống kê: %.4f", test)
+    printf("Kết quả của c: %.4f", c)
+    get_test_result(test, c)
+  }
+  return(list(test = test, c = c, sum_n_i = sum_n_i,
+              sum_m_i = sum_m_i, sum_l_i = sum_l_i))
+}
+
+#' Hàm này thưc hiện so sánh n tỷ lệ.
+#' m_i, n_i là các vector thể hiện số quan sát có đặc tính A
+#' nào đó và tổng số quan sát trong các tập tổng thể.
+#' Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
+#' l (sum_l_i), N (sum_n_i)
+#' @export
+test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
+  if(!check_test_k_prop(m_i, n_i)) {
     if(!silent) {
       print("Không đủ điều kiện áp dụng test thống kê")
     }
