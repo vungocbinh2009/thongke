@@ -16,6 +16,13 @@ test_that("Test các data_* function", {
   print(var(x))
   print(mean(y))
   print(var(y))
+
+  data_simulate_test_goodness_of_fit(c(100, 200, 100, 100, 200, 100),
+                                     max_diff = 30, min_diff = -30, step = 200)
+  data_simulate_test_k_prop(c(160, 320, 240, 160), c(40, 80, 60, 40),
+                            max_diff = 20, min_diff = -20, step = 200)
+  data_simulate_test_independent(matrix(c(100, 100, 100, 100, 100, 100, 100, 100, 100), nrow=3, ncol=3, byrow = TRUE),
+                                 max_diff = 70, min_diff = -30, step = 800)
   expect_equal(1, 1)
 
 })

@@ -10,7 +10,7 @@ build(
   quiet = FALSE,
 )
 
-document(pkg = ".", roclets = NULL, quiet = FALSE)
+document(pkg = "build", roclets = NULL, quiet = FALSE)
 
 
 

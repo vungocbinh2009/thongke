@@ -57,6 +57,44 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
   return(list(x = x, y = y))
 }
 
+#' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ
+#' @export
+data_simulate_test_goodness_of_fit <- function (expected, max_diff, min_diff, step=50, silent=FALSE) {
+  diff_matrix <- get_diff_matrix(2, length(expected),
+                                 max_diff, min_diff, step)
+  result <- expected + diff_matrix[1, ]
+  if(!silent) {
+    print(result)
+  }
+  return(result)
+}
+
+#' Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ
+#' @export
+data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, max_diff, min_diff, step=50, silent=FALSE) {
+  matrix <- matrix(c(expected_m_i, expected_l_i),
+                   nrow = 2, ncol = length(expected_m_i), byrow = TRUE)
+  diff_matrix <- get_diff_matrix(2, length(expected_m_i),
+                                 max_diff, min_diff, step)
+  result <- matrix + diff_matrix
+  if(!silent) {
+    print(result)
+  }
+  return(result)
+}
+
+#' #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
+#' @export
+data_simulate_test_independent <- function (expected_matrix, max_diff, min_diff, step=50, silent=FALSE) {
+  diff_matrix <- get_diff_matrix(dim(expected_matrix)[1], dim(expected_matrix)[2],
+                                 max_diff, min_diff, step)
+  result <- expected_matrix + diff_matrix
+  if(!silent) {
+    print(result)
+  }
+  return(result)
+}
+
 #' Hàm này xây dựng cut_vector cho hàm data_simulate_regression
 get_cut_vector <- function(min, max, size) {
   groups <- (max - min) / size
@@ -65,4 +103,46 @@ get_cut_vector <- function(min, max, size) {
     cut_vector <- c(cut_vector, min + i*size)
   }
   return(cut_vector)
+}
+
+#' Hàm này tạo 1 mà trận với các số ngẫu nhiên, và tổng các hàng và các cột đều bằng 0.
+#' Hàm này có thể được sử dụng để tạo bảng dữ liệu trong các bài toán
+#' - Kiểm định sự phù hợp khi bình phương
+#' - Kiểm định k tỷ lệ
+#' - Kiểm định tính độc lập
+#' (Bằng cách tính tần số lý thuyết, rồi công thêm ma trận này)
+get_diff_matrix <- function (row, column, max, min, step=50) {
+  matrix <- matrix(0, row, column)
+  i <- 0
+  while(i < step) {
+    random_row <- sample(1:row, 2, replace=F)
+    random_col <- sample(1:column, 2, replace=F)
+    random_number <- 1
+    matrix <- diff_matrix_update(matrix, random_row, random_col, random_number)
+    i %+=% 1
+    vector <- as.vector(matrix)
+    if(length(vector[vector > max]) > 0 || length(vector[vector < min]) > 0) {
+      matrix <- diff_matrix_rollback(matrix, random_row, random_col, random_number)
+      i %-=% 1
+    }
+  }
+  return(matrix)
+}
+
+# Hàm này dùng để cập nhật matrix trong hàm get_diff_matrix
+diff_matrix_update <- function(matrix, random_row, random_col, random_number) {
+  matrix[random_row[1], random_col[1]] %+=% random_number
+  matrix[random_row[2], random_col[2]] %+=% random_number
+  matrix[random_row[1], random_col[2]] %-=% random_number
+  matrix[random_row[2], random_col[1]] %-=% random_number
+  return(matrix)
+}
+
+# Hàm này dùng để rollbackt matrix trong hàm get_diff_matrix
+diff_matrix_rollback <- function(matrix, random_row, random_col, random_number) {
+  matrix[random_row[1], random_col[1]] %-=% random_number
+  matrix[random_row[2], random_col[2]] %-=% random_number
+  matrix[random_row[1], random_col[2]] %+=% random_number
+  matrix[random_row[2], random_col[1]] %+=% random_number
+  return(matrix)
 }
