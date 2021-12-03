@@ -1,13 +1,11 @@
----
-title: "R Notebook"
-output: html_document
----
-
 # thongke
-Một thư viện tính toán thống kê đơn giản, dễ sử dụng dành cho người dạy và người học
+
+Một thư viện tính toán thống kê đơn giản, dễ sử dụng dành cho người dạy
+và người học
 
 # Install
-```r
+
+``` r
 # Install devtools
 install.packages("devtools")
 # Install thongke
@@ -15,25 +13,13 @@ devtools::install_github("vungocbinh2009/thongke")
 ```
 
 # How to use
+
 ### Generate data
 
-```r
+``` r
 library(thongke)
 library(testthat)
-```
 
-```
-## 
-## Attaching package: 'testthat'
-```
-
-```
-## The following object is masked from 'package:devtools':
-## 
-##     test_file
-```
-
-```r
 test_that("Test các data_* function", {
   data_1 <- data_simulate_discrete(n = 100, mean = 5, sd = 2, min = 2, max = 8)
   print(mean(data_1))
@@ -70,54 +56,45 @@ test_that("Test các data_* function", {
 })
 ```
 
-```
-## 
-##  2  3  4  5  6  7  8 
-##  3  7 20 32 25  9  4 
-## [1] 5.12
-## [1] 1.722828
-## data.cut
-## (2,3] (3,4] (4,5] (5,6] (6,7] (7,8] 
-##     6    19    23    23    18    11 
-## [1] 5.11
-## [1] 2.018081
-##        x      y
-## 2  16.50 165.04
-## 9  19.66 202.60
-## 1  19.74 203.66
-## 7  20.17 207.42
-## 10 20.35 209.32
-## 6  21.44 219.98
-## 3  21.58 222.11
-## 5  24.38 247.17
-## 8  25.75 268.22
-## 4  29.68 301.20
-## [1] 21.925
-## [1] 14.00529
-## [1] 224.672
-## [1] 1478.408
-## [1] 108 116  88 108  83  97
-##      [,1] [,2] [,3] [,4]
-## [1,]  164  314  233  169
-## [2,]   36   86   67   31
-##      [,1] [,2] [,3]
-## [1,]   98  205  297
-## [2,]  392  503  605
-## [3,]  710  792  898
-## [1]  99  88 107 119  97  90
-##      [,1] [,2] [,3] [,4]
-## [1,]  171  306  221  159
-## [2,]   47   81   73   42
-##      [,1] [,2] [,3]
-## [1,]   94  193  274
-## [2,]  398  516  609
-## [3,]  715  809  892
-## Test passed 🥳
-```
+    ## 
+    ##  2  3  4  5  6  7  8 
+    ##  6 13 25 27 17 10  2 
+    ## [1] 4.74
+    ## [1] 2.012525
+    ## data.cut
+    ## (2,3] (3,4] (4,5] (5,6] (6,7] (7,8] 
+    ##     9    14    25    18    24    10 
+    ## [1] 5.14
+    ## [1] 2.151919
+    ##        x      y
+    ## 7  15.14 160.11
+    ## 8  15.37 156.60
+    ## 6  16.36 166.66
+    ## 9  17.68 180.16
+    ## 5  19.46 199.10
+    ## 4  22.63 230.65
+    ## 3  22.80 231.37
+    ## 2  24.58 258.11
+    ## 1  25.25 257.85
+    ## 10 28.19 287.05
+    ## [1] 20.746
+    ## [1] 20.97632
+    ## [1] 212.766
+    ## [1] 2175.072
+    ## [1]  79  83 128 115  99  96
+    ##      [,1] [,2] [,3] [,4]
+    ## [1,]  166  323  234  157
+    ## [2,]   34   77   66   43
+    ##      [,1] [,2] [,3]
+    ## [1,]  105  192  303
+    ## [2,]  392  508  600
+    ## [3,]  703  800  897
+    ## ── Error (<text>:29:3): Test các data_* function ───────────────────────────────
+    ## Error: could not find function "data_simulate_test_goodness_of_fit_2"
 
 ### Calculate
 
-```r
+``` r
 library(thongke)
 library(testthat)
 
@@ -193,83 +170,103 @@ test_that("Test các trường hợp cụ thể", {
 })
 ```
 
-```
-## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)"
-## [1] "Khoảng tin cậy cần tìm là: (39.5083; 40.0917)"
-## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố chuẩn)"
-## [1] "Khoảng tin cậy cần tìm là: (65.0200; 66.9800)"
-## [1] "==================================================="
-## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)"
-## [1] "Khoảng tin cậy cần tìm là: (39.5083; 40.0917)"
-## [1] "==================================================="
-## [1] "Bài toán: Ước lượng khoảng cho phương sai"
-## [1] "Khoảng tin cậy cần tìm là: (0.0006; 0.0020)"
-## [1] "==================================================="
-## [1] "Bài toán: Ước lượng khoảng cho tỷ lệ"
-## [1] "Khoảng tin cậy cần tìm là: (0.5194; 0.6806)"
-## [1] "==================================================="
-## [1] "Bài toán: Xác định kích thước mẫu (ước lượng trung bình)"
-## [1] "Kích thước mẫu tối thiểu: 96.8256"
-## [1] "==================================================="
-## [1] "Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, đã biết f)"
-## [1] "Kích thước mẫu tối thiểu: 1549.2096"
-## [1] "==================================================="
-## [1] "Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, chưa biết f)"
-## [1] "Kích thước mẫu tối thiểu: 1681.0000"
-## [1] "==================================================="
-## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)"
-## [1] "Kết quả test thống kê: 3.0000"
-## [1] "Kết quả của c: 1.9600"
-## [1] "Kết luận: Bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)"
-## [1] "Kết quả test thống kê: -1.1619"
-## [1] "Kết quả của c: 2.5706"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: Kiểm định giả thiết cho tỷ lệ"
-## [1] "Kết quả test thống kê: -1.4213"
-## [1] "Kết quả của c: 1.9600"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)"
-## [1] "Kết quả test thống kê: 4.2200"
-## [1] "Kết quả của c: 11.0705"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)"
-## [1] "Kết quả test thống kê: -5.0000"
-## [1] "Kết quả của c: 2.5758"
-## [1] "Kết luận: Bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố Student)"
-## [1] "Kết quả test thống kê: 1.1736"
-## [1] "Kết quả của c: 2.8453"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: So sánh 2 tỷ lệ"
-## [1] "Kết quả test thống kê: -0.6569"
-## [1] "Kết quả của c: 1.9600"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: So sánh n tỷ lệ"
-## [1] "Kết quả test thống kê: 2.4282"
-## [1] "Kết quả của c: 11.0705"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: Kiểm định tính độc lập"
-## [1] "Kết quả test thống kê: 0.3685"
-## [1] "Kết quả của c: 3.8415"
-## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
-## [1] "==================================================="
-## [1] "Bài toán: Tính hệ số tương quan"
-## [1] "Hệ số tương quan: 0.8590"
-## [1] "==================================================="
-## [1] "Bài toán: Bài toán hồi quy tuyến tính đơn"
-## [1] "Hệ số tự do: 36.0000"
-## [1] "Hệ số ứng với x: 0.0200"
-## Test passed 🥇
-```
+    ## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)"
+    ## [1] "Khoảng tin cậy cần tìm là: (39.5083; 40.0917)"
+    ## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố chuẩn)"
+    ## [1] "Khoảng tin cậy cần tìm là: (65.0200; 66.9800)"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)"
+    ## [1] "Khoảng tin cậy cần tìm là: (39.5083; 40.0917)"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Ước lượng khoảng cho phương sai"
+    ## [1] "Khoảng tin cậy cần tìm là: (0.0006; 0.0020)"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Ước lượng khoảng cho tỷ lệ"
+    ## [1] "Khoảng tin cậy cần tìm là: (0.5194; 0.6806)"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Xác định kích thước mẫu (ước lượng trung bình)"
+    ## [1] "Kích thước mẫu tối thiểu: 96.8256"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, đã biết f)"
+    ## [1] "Kích thước mẫu tối thiểu: 1549.2096"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, chưa biết f)"
+    ## [1] "Kích thước mẫu tối thiểu: 1681.0000"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)"
+    ## [1] "Kết quả test thống kê: 3.0000"
+    ## [1] "Kết quả của c: 1.9600"
+    ## [1] "Kết luận: Bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)"
+    ## [1] "Kết quả test thống kê: -1.1619"
+    ## [1] "Kết quả của c: 2.5706"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Kiểm định giả thiết cho tỷ lệ"
+    ## [1] "Kết quả test thống kê: -1.4213"
+    ## [1] "Kết quả của c: 1.9600"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)"
+    ## [1] "Kết quả test thống kê: 4.2200"
+    ## [1] "Kết quả của c: 11.0705"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)"
+    ## [1] "Kết quả test thống kê: -5.0000"
+    ## [1] "Kết quả của c: 2.5758"
+    ## [1] "Kết luận: Bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố Student)"
+    ## [1] "Kết quả test thống kê: 1.1736"
+    ## [1] "Kết quả của c: 2.8453"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: So sánh 2 tỷ lệ"
+    ## [1] "Kết quả test thống kê: -0.6569"
+    ## [1] "Kết quả của c: 1.9600"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: So sánh n tỷ lệ"
+    ## [1] "Kết quả test thống kê: 2.4282"
+    ## [1] "Kết quả của c: 11.0705"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Kiểm định tính độc lập"
+    ## [1] "Kết quả test thống kê: 0.3685"
+    ## [1] "Kết quả của c: 3.8415"
+    ## [1] "Kết luận: Chưa đủ cơ sở để bác bỏ H0"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Tính hệ số tương quan"
+    ## [1] "Hệ số tương quan: 0.8590"
+    ## [1] "==================================================="
+    ## [1] "Bài toán: Bài toán hồi quy tuyến tính đơn"
+    ## [1] "Hệ số tự do: 36.0000"
+    ## [1] "Hệ số ứng với x: 0.0200"
+    ## Test passed 🎊
 
 # License
-[MIT License](LICENSE)
+
+MIT License
+
+Copyright (c) 2021 vungocbinh2009
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+“Software”), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

@@ -13,8 +13,6 @@ build(
 
 document(pkg = "build", roclets = NULL, quiet = FALSE)
 
-knit(input="README.rmd", output = "README.md")
-
 
 
 

@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_document
+output:
+  md_document:
+    variant: gfm
 ---
 
 # thongke
@@ -26,4 +28,6 @@ devtools::install_github("vungocbinh2009/thongke")
 ```
 
 # License
-[MIT License](LICENSE)
+```{r results="asis", echo=FALSE}
+cat(readLines('LICENSE'), sep = '\n')
+```
