@@ -83,7 +83,7 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, max_diff, min
   return(result)
 }
 
-#' #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
+#' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
 #' @export
 data_simulate_test_independent <- function (expected_matrix, max_diff, min_diff, step=50, silent=FALSE) {
   diff_matrix <- get_diff_matrix(dim(expected_matrix)[1], dim(expected_matrix)[2],
@@ -93,6 +93,47 @@ data_simulate_test_independent <- function (expected_matrix, max_diff, min_diff,
     print(result)
   }
   return(result)
+}
+
+#' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ
+#' @export
+data_simulate_test_goodness_of_fit_2 <- function (expected, silent=FALSE) {
+  size <- sum(expected)
+  data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
+  freq <- as.integer(table(data))
+  if(!silent) {
+    print(freq)
+  }
+  return(freq)
+}
+
+#' Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ
+#' @export
+data_simulate_test_k_prop_2 <- function (expected_m_i, expected_l_i, silent=FALSE) {
+  expected <- c(expected_m_i, expected_l_i)
+  size <- sum(expected)
+  data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
+  freq <- as.integer(table(data))
+  matrix <- matrix(freq, nrow = 2, ncol = length(expected_m_i), byrow = TRUE)
+  if(!silent) {
+    print(matrix)
+  }
+  return(matrix)
+}
+
+#' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
+#' @export
+data_simulate_test_independent_2 <- function (expected_matrix, silent=FALSE) {
+  vector <- as.vector(expected_matrix)
+  size <- sum(vector)
+  data <- sample(seq_along(vector), size, prob = vector, replace = TRUE)
+  freq <- as.integer(table(data))
+  matrix <- matrix(freq, nrow=dim(expected_matrix)[1],
+                   ncol = dim(expected_matrix)[2], byrow = FALSE)
+  if(!silent) {
+    print(matrix)
+  }
+  return(matrix)
 }
 
 #' Hàm này xây dựng cut_vector cho hàm data_simulate_regression
@@ -117,7 +158,7 @@ get_diff_matrix <- function (row, column, max, min, step=50) {
   while(i < step) {
     random_row <- sample(1:row, 2, replace=F)
     random_col <- sample(1:column, 2, replace=F)
-    random_number <- 1
+    random_number <- sample(1:5, 1)
     matrix <- diff_matrix_update(matrix, random_row, random_col, random_number)
     i %+=% 1
     vector <- as.vector(matrix)
@@ -138,7 +179,7 @@ diff_matrix_update <- function(matrix, random_row, random_col, random_number) {
   return(matrix)
 }
 
-# Hàm này dùng để rollbackt matrix trong hàm get_diff_matrix
+# Hàm này dùng để rollback matrix trong hàm get_diff_matrix
 diff_matrix_rollback <- function(matrix, random_row, random_col, random_number) {
   matrix[random_row[1], random_col[1]] %-=% random_number
   matrix[random_row[2], random_col[2]] %-=% random_number
@@ -146,3 +187,4 @@ diff_matrix_rollback <- function(matrix, random_row, random_col, random_number) 
   matrix[random_row[2], random_col[1]] %+=% random_number
   return(matrix)
 }
+

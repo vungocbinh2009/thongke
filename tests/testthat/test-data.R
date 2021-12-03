@@ -17,12 +17,21 @@ test_that("Test các data_* function", {
   print(mean(y))
   print(var(y))
 
-  data_simulate_test_goodness_of_fit(c(100, 200, 100, 100, 200, 100),
-                                     max_diff = 30, min_diff = -30, step = 200)
+  data_simulate_test_goodness_of_fit(c(100, 100, 100, 100, 100, 100),
+                                     max_diff = 30, min_diff = -30, step = 50)
+
   data_simulate_test_k_prop(c(160, 320, 240, 160), c(40, 80, 60, 40),
-                            max_diff = 20, min_diff = -20, step = 200)
-  data_simulate_test_independent(matrix(c(100, 100, 100, 100, 100, 100, 100, 100, 100), nrow=3, ncol=3, byrow = TRUE),
-                                 max_diff = 70, min_diff = -30, step = 800)
+                            max_diff = 10, min_diff = -10, step = 50)
+
+  data_simulate_test_independent(matrix(c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE),
+                                 max_diff = 15, min_diff = -15, step = 200)
+
+  data_simulate_test_goodness_of_fit_2(c(100, 100, 100, 100, 100, 100),)
+
+  data_simulate_test_k_prop_2(c(160, 320, 240, 160), c(40, 80, 60, 40))
+
+  data_simulate_test_independent_2(matrix(c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE))
+
   expect_equal(1, 1)
 
 })
