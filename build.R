@@ -1,5 +1,4 @@
 library(devtools)
-library(knitr)
 
 build(
   pkg = ".",

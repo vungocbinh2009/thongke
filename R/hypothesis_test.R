@@ -14,7 +14,13 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq", silent = F
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && mean > mean_0
+    case_2 <- mode == "greater" && mean < mean_0
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
   return(list(test = test, c = c))
 }
@@ -35,7 +41,13 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq", silent = FALSE) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && mean > mean_0
+    case_2 <- mode == "greater" && mean < mean_0
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
   return(list(test = test, c = c))
 }
@@ -62,7 +74,13 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
     print("Bài toán: Kiểm định giả thiết cho tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && f > p_0
+    case_2 <- mode == "greater" && f < p_0
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
   return(list(test = test, c = c))
 }
@@ -117,7 +135,13 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && mean1 > mean2
+    case_2 <- mode == "greater" && mean1 < mean2
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
 
   return(list(test = test, c = c))
@@ -140,7 +164,13 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq", silen
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố Student)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && mean1 > mean2
+    case_2 <- mode == "greater" && mean1 < mean2
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
   return(list(test = test, c = c, s = s))
 }
@@ -168,7 +198,13 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
     print("Bài toán: So sánh 2 tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    case_1 <- mode == "less" && f1 > f2
+    case_2 <- mode == "greater" && f1 < f2
+    if(case_1 || case_2) {
+      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
+    } else {
+      get_test_result(test, c)
+    }
   }
   return(list(test = test, c = c, f = f))
 }
