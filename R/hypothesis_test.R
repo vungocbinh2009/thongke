@@ -10,19 +10,20 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq", silent = F
     "less" = qnorm(1 - alpha),
     "greater" = qnorm(1 - alpha)
   )
+  case_1 <- mode == "less" && mean > mean_0
+  case_2 <- mode == "greater" && mean < mean_0
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && mean > mean_0
-    case_2 <- mode == "greater" && mean < mean_0
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = rejected))
 }
 
 #' Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố student
@@ -37,19 +38,20 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq", silent = FALSE) {
     "less" = qt(1 - alpha, df=n-1),
     "greater" = qt(1 - alpha, df=n-1)
   )
+  case_1 <- mode == "less" && mean > mean_0
+  case_2 <- mode == "greater" && mean < mean_0
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && mean > mean_0
-    case_2 <- mode == "greater" && mean < mean_0
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = rejected))
 }
 
 #' Hàm này kiểm định giả thiết về xác suất
@@ -70,19 +72,20 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
     "less" = qnorm(1 - alpha),
     "greater" = qnorm(1 - alpha)
   )
+  case_1 <- mode == "less" && f > p_0
+  case_2 <- mode == "greater" && f < p_0
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && f > p_0
-    case_2 <- mode == "greater" && f < p_0
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = rejected))
 }
 
 #' Hàm này đã Deprecated, dùng hàm test_goodness_of_fit để thay thế.
@@ -98,9 +101,9 @@ test_chi_squared <- function(actual, expected, alpha, silent = FALSE) {
     print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = abs(test) > c))
 }
 
 #' Hàm này thực hiện kiểm định khi bình phương
@@ -114,9 +117,9 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
     print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = abs(test) > c))
 }
 
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố chuẩn)
@@ -131,20 +134,21 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
     "less" = qnorm(1 - alpha),
     "greater" = qnorm(1 - alpha)
   )
+  case_1 <- mode == "less" && mean1 > mean2
+  case_2 <- mode == "greater" && mean1 < mean2
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && mean1 > mean2
-    case_2 <- mode == "greater" && mean1 < mean2
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
 
-  return(list(test = test, c = c))
+  return(list(test = test, c = c, rejected = rejected))
 }
 
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố Student)
@@ -160,19 +164,20 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq", silen
     "less" = qt(1 - alpha, df=n1+n2-2),
     "greater" = qt(1 - alpha, df=n1+n2-2)
   )
+  case_1 <- mode == "less" && mean1 > mean2
+  case_2 <- mode == "greater" && mean1 < mean2
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố Student)")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && mean1 > mean2
-    case_2 <- mode == "greater" && mean1 < mean2
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
-  return(list(test = test, c = c, s = s))
+  return(list(test = test, c = c, s = s, rejected = rejected))
 }
 
 #' Hàm này thực hiện so sánh 2 tỷ lệ
@@ -194,19 +199,20 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
     "less" = qnorm(1 - alpha),
     "greater" = qnorm(1 - alpha)
   )
+  case_1 <- mode == "less" && f1 > f2
+  case_2 <- mode == "greater" && f1 < f2
+  if (case_1 || case_2) {
+    rejected <- FALSE
+  } else {
+    rejected <- abs(test) > c
+  }
   if(!silent) {
     print("Bài toán: So sánh 2 tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    case_1 <- mode == "less" && f1 > f2
-    case_2 <- mode == "greater" && f1 < f2
-    if(case_1 || case_2) {
-      print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
-    } else {
-      get_test_result(test, c)
-    }
+    print_test_result(rejected)
   }
-  return(list(test = test, c = c, f = f))
+  return(list(test = test, c = c, f = f, rejected = rejected))
 }
 
 #' Hàm này đã deprecated, thay bằng hàm test_k_prop.
@@ -233,9 +239,9 @@ test_n_prop <- function(m_i, n_i, alpha, silent = FALSE) {
     print("Bài toán: So sánh n tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c, sum_n_i = sum_n_i,
+  return(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
               sum_m_i = sum_m_i, sum_l_i = sum_l_i))
 }
 
@@ -261,9 +267,9 @@ test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
     print("Bài toán: So sánh n tỷ lệ")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c, sum_n_i = sum_n_i,
+  return(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
               sum_m_i = sum_m_i, sum_l_i = sum_l_i))
 }
 
@@ -296,15 +302,14 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
     print("Bài toán: Kiểm định tính độc lập")
     printf("Kết quả test thống kê: %.4f", test)
     printf("Kết quả của c: %.4f", c)
-    get_test_result(test, c)
+    print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c,
+  return(list(test = test, c = c, rejected = abs(test) > c,
          row_sums = row_sums, col_sums = col_sums, n = n))
 }
 
-#' Hàm này in ra kết quả của bài toán kiểm định giả thiết
-get_test_result <- function(test, c) {
-  if(abs(test) > c) {
+print_test_result <- function (rejected) {
+  if(rejected) {
     print("Kết luận: Bác bỏ H0")
   } else {
     print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
