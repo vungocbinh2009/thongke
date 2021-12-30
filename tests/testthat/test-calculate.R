@@ -69,5 +69,7 @@ test_that("Test các trường hợp cụ thể", {
   linear_regression(x = c(400, 600, 500, 600, 400, 500),
                     y = c(44, 47, 48, 48, 43, 46))
   # Đáp số: y=0.02x + 36
+  calculate_sum(x = c(400, 600, 500, 600, 400, 500),
+                y = c(44, 47, 48, 48, 43, 46))
   expect_equal(1, 1)
 })
