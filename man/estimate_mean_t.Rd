@@ -3,11 +3,13 @@
 \name{estimate_mean_t}
 \alias{estimate_mean_t}
 \title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
-#' Hàm trả về các giá trị t_alpha, bottom, top}
+#' Hàm trả về các giá trị t_alpha, bottom, top
+mode có 3 chế độ: two.side}
 \usage{
-estimate_mean_t(n, mean, s, alpha, silent = FALSE)
+estimate_mean_t(n, mean, s, alpha, mode = "two.side", silent = FALSE)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
 #' Hàm trả về các giá trị t_alpha, bottom, top
+mode có 3 chế độ: two.side
 }

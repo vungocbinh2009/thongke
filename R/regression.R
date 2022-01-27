@@ -45,11 +45,11 @@ calculate_sum <- function (x, y, silent=FALSE) {
   sum_y2 <- sum(y*y)
   sum_xy <- sum(x*y)
   if(!silent) {
-    print(sprintf("Tổng x: %.4f", sum_x))
-    print(sprintf("Tổng y: %.4f", sum_y))
-    print(sprintf("Tổng xy: %.4f", sum_xy))
-    print(sprintf("Tổng x2: %.4f", sum_x2))
-    print(sprintf("Tổng y2: %.4f", sum_y2))
+    printf("Tổng x: %.4f", sum_x)
+    printf("Tổng y: %.4f", sum_y)
+    printf("Tổng xy: %.4f", sum_xy)
+    printf("Tổng x2: %.4f", sum_x2)
+    printf("Tổng y2: %.4f", sum_y2)
   }
   return(list(
     sum_x = sum_x,

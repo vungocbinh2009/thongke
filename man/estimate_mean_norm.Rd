@@ -3,11 +3,13 @@
 \name{estimate_mean_norm}
 \alias{estimate_mean_norm}
 \title{Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
-Hàm trả về các giá trị z_alpha, bottom, top}
+Hàm trả về các giá trị z_alpha, bottom, top
+mode có 3 chế độ: two.side}
 \usage{
-estimate_mean_norm(n, mean, sigma, alpha, silent = FALSE)
+estimate_mean_norm(n, mean, sigma, alpha, mode = "two.side", silent = FALSE)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 Hàm trả về các giá trị z_alpha, bottom, top
+mode có 3 chế độ: two.side
 }
