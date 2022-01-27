@@ -5,15 +5,31 @@ test_that("Test các trường hợp cụ thể", {
   # In ra để không mất dòng dưới
   estimate_mean_t(mean = 39.8, alpha = 0.01, n = 15, s = sqrt(0.144))
   estimate_mean_norm(sigma = 3, n = 36, alpha = 0.05, mean = 66)
+  print("===================================================")
+  estimate_mean_norm(sigma = 3, n = 36, alpha = 0.05, mean = 66, mode="min")
+  print("===================================================")
+  estimate_mean_norm(sigma = 3, n = 36, alpha = 0.05, mean = 66, mode="max")
   # Đáp số: 65,02 - 66,98
   print("===================================================")
   estimate_mean_t(mean = 39.8, alpha = 0.01, n = 15, s = sqrt(0.144))
+  print("===================================================")
+  estimate_mean_t(mean = 39.8, alpha = 0.01, n = 15, s = sqrt(0.144), mode="min")
+  print("===================================================")
+  estimate_mean_t(mean = 39.8, alpha = 0.01, n = 15, s = sqrt(0.144), mode="max")
   # Đáp số: 39,5023 - 40,0977
   print("===================================================")
   estimate_var(n = 30, s = 0.032, alpha = 0.025)
+  print("===================================================")
+  estimate_var(n = 30, s = 0.032, alpha = 0.025, mode="min")
+  print("===================================================")
+  estimate_var(n = 30, s = 0.032, alpha = 0.025, mode="max")
   # Đáp số: 0.000649 - 0.001851
   print("===================================================")
   estimate_prop(n = 100, f = 0.6, alpha = 0.1)
+  print("===================================================")
+  estimate_prop(n = 100, f = 0.6, alpha = 0.1, mode="min")
+  print("===================================================")
+  estimate_prop(n = 100, f = 0.6, alpha = 0.1, mode="max")
   # Đáp số: 0.52 - 0.68
   print("===================================================")
   sample_size_mean(sigma = 3, alpha = get_alpha(1.64), eps = 0.5)

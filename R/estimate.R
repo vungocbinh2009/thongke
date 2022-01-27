@@ -106,11 +106,11 @@ estimate_prop <- function(n, f, alpha, mode = "two.side", silent = FALSE) {
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho tỷ lệ")
     if(mode == "two.side") {
-      printf("Khoảng tin cậy cần tìm là: (%.4f; %.4f)", bottom, top)
+      printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if(mode == "max") {
-      printf("Khoảng tin cậy cần tìm là: (0; %.4f)", max)
+      printf("Khoảng tin cậy lớn nhất là: (0; %.4f)", max)
     } else {
-      printf("Khoảng tin cậy cần tìm là: (%.4f; 1)", min)
+      printf("Khoảng tin cậy nhỏ nhất là: (%.4f; 1)", min)
     }
   }
   return(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
