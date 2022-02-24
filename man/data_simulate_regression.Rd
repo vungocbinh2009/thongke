@@ -2,9 +2,7 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_regression}
 \alias{data_simulate_regression}
-\title{Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn
-Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
-Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y}
+\title{Tạo dữ liệu cho bài toán hồi quy tuyến tính}
 \usage{
 data_simulate_regression(
   n,

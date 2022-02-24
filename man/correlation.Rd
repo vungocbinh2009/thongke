@@ -2,7 +2,7 @@
 % Please edit documentation in R/regression.R
 \name{correlation}
 \alias{correlation}
-\title{Hàm này tính và trả về giá trị hệ số tương quan.}
+\title{Tính hệ số tương quan.}
 \usage{
 correlation(x, y, silent = FALSE)
 }

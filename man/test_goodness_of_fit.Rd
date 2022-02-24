@@ -2,9 +2,7 @@
 % Please edit documentation in R/hypothesis_test.R
 \name{test_goodness_of_fit}
 \alias{test_goodness_of_fit}
-\title{Hàm này thực hiện kiểm định khi bình phương
-actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
-Hàm trả về kết quả của test thống kê (test) và giá trị c}
+\title{Kiểm định sự phù hợp của k tỷ lệ.}
 \usage{
 test_goodness_of_fit(actual, expected, alpha, silent = FALSE)
 }

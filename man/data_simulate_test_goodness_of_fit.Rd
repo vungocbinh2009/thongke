@@ -2,15 +2,9 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_test_goodness_of_fit}
 \alias{data_simulate_test_goodness_of_fit}
-\title{Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ}
+\title{Dữ liệu cho bài toán kiểm định khi bình phương.}
 \usage{
-data_simulate_test_goodness_of_fit(
-  expected,
-  max_diff,
-  min_diff,
-  step = 50,
-  silent = FALSE
-)
+data_simulate_test_goodness_of_fit(expected, silent = FALSE)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ

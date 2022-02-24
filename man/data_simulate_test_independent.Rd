@@ -2,15 +2,9 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_test_independent}
 \alias{data_simulate_test_independent}
-\title{Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập}
+\title{Dữ liệu cho bài toán kiểm định tính độc lập.}
 \usage{
-data_simulate_test_independent(
-  expected_matrix,
-  max_diff,
-  min_diff,
-  step = 50,
-  silent = FALSE
-)
+data_simulate_test_independent(expected_matrix, silent = FALSE)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập

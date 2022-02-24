@@ -2,11 +2,9 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_discrete}
 \alias{data_simulate_discrete}
-\title{Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
-Hàm sẽ in ra bảng phân bố tần số và trả về dữ liệu được hàm tạo ra.
-Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm}
+\title{Tạo dữ liệu rời rạc.}
 \usage{
-data_simulate_discrete(n, mean, sd, min, max, silent = FALSE)
+data_simulate_discrete(n, mean, sd, min, max, round_digits = 0, silent = FALSE)
 }
 \description{
 Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max

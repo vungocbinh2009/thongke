@@ -2,8 +2,7 @@
 % Please edit documentation in R/regression.R
 \name{linear_regression_predict}
 \alias{linear_regression_predict}
-\title{Hàm này thực hiện tính và trả về kết quả dự đoán giá trị
-trong bài toán hồi quy tuyến tính đơn.}
+\title{Dự đoán giá trị cho bài toán hồi quy tuyến tính đơn.}
 \usage{
 linear_regression_predict(x, y, value, silent = FALSE)
 }

@@ -2,11 +2,7 @@
 % Please edit documentation in R/hypothesis_test.R
 \name{test_independent}
 \alias{test_independent}
-\title{Hàm này thực hiện kiểm định tính độc lập của 2 dấu hiệu A và B
-matrix là một ma trận với các phần tử n_ij nằm trong bảng liên hợp các dấu hiệu
-(Contingency Table)
-Hàm trả về kết quả của test thống kê (test), giá trị c
-cùng các kết quả row_sums, col_sums và n (kích thước mẫu)}
+\title{KIểm định tính độc lập.}
 \usage{
 test_independent(matrix, alpha, silent = FALSE)
 }

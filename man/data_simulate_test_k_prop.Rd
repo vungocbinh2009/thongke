@@ -2,16 +2,9 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_test_k_prop}
 \alias{data_simulate_test_k_prop}
-\title{Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ}
+\title{Dữ liệu cho bài toán kiểm định k tỷ lệ.}
 \usage{
-data_simulate_test_k_prop(
-  expected_m_i,
-  expected_l_i,
-  max_diff,
-  min_diff,
-  step = 50,
-  silent = FALSE
-)
+data_simulate_test_k_prop(expected_m_i, expected_l_i, silent = FALSE)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ

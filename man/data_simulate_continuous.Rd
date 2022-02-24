@@ -2,10 +2,7 @@
 % Please edit documentation in R/data.R
 \name{data_simulate_continuous}
 \alias{data_simulate_continuous}
-\title{Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
-Hàm sẽ in ra bảng phân bố tần số ghép lớp, theo các giá trị cut cho trước
-Hàm cũng trả về dữ liệu dưới dạng ghép lớp (điểm giữa của các khoảng)
-Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm}
+\title{Tạo dữ liệu liên tục.}
 \usage{
 data_simulate_continuous(n, mean, sd, min, max, size, silent = FALSE)
 }

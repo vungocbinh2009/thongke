@@ -2,8 +2,7 @@
 % Please edit documentation in R/estimate.R
 \name{estimate_prop}
 \alias{estimate_prop}
-\title{Hàm này ước lượng khoảng cho tỷ lệ
-Hàm trả về các giá trị z_alpha, bottom, top}
+\title{Ước lượng khoảng cho tỷ lệ.}
 \usage{
 estimate_prop(n, f, alpha, mode = "two.side", silent = FALSE)
 }

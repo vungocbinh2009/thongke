@@ -2,9 +2,7 @@
 % Please edit documentation in R/hypothesis_test.R
 \name{test_2_prop}
 \alias{test_2_prop}
-\title{Hàm này thực hiện so sánh 2 tỷ lệ
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
-Hàm trả về kết quả của test thống kê (test) và giá trị c và tỷ lệ chung f}
+\title{Kiểm định giả thiết: So sánh 2 tỷ lệ.}
 \usage{
 test_2_prop(n1, n2, f1, f2, alpha, mode = "neq", silent = FALSE)
 }

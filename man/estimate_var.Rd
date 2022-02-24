@@ -2,8 +2,7 @@
 % Please edit documentation in R/estimate.R
 \name{estimate_var}
 \alias{estimate_var}
-\title{Hàm này ước lượng khoảng cho phương sai.
-Hàm trả về các giá trị chi_sq_1, chi_sq_2,, bottom, top}
+\title{Ước lượng khoảng cho phương sai}
 \usage{
 estimate_var(n, s, alpha, mode = "two.side", silent = FALSE)
 }

@@ -2,9 +2,7 @@
 % Please edit documentation in R/hypothesis_test.R
 \name{test_2_mean_t}
 \alias{test_2_mean_t}
-\title{Hàm này so sánh 2 giá trị trung bình (dùng phân bố Student)
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
-Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s}
+\title{Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố Student)}
 \usage{
 test_2_mean_t(
   n1,
