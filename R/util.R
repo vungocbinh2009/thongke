@@ -15,9 +15,3 @@ get_alpha <- function(z_alpha, two_side = TRUE) {
   }
 }
 
-#' Toán tử += để rút gọn câu lệnh
-`%+=%` <- function(e1,e2) eval.parent(substitute(e1 <- e1 + e2))
-
-#' Toán tử -= để rút gọn câu lệnh
-`%-=%` <- function(e1,e2) eval.parent(substitute(e1 <- e1 - e2))
-

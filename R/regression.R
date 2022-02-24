@@ -1,3 +1,5 @@
+#' Tính hệ số tương quan.
+#'
 #' Hàm này tính và trả về giá trị hệ số tương quan.
 #' @export
 correlation <- function(x, y, silent = FALSE) {
@@ -9,7 +11,10 @@ correlation <- function(x, y, silent = FALSE) {
   return(cor)
 }
 
-#' Hàm này thực hiện bài toán hồi quy tuyến tính đơn và trả về các giá trị a, b (y = ax+b)
+#' Bài toán hồi quy tuyến tính đơn.
+#'
+#' Hàm này thực hiện bài toán hồi quy tuyến tính đơn và
+#' trả về các giá trị a, b (y = ax+b)
 #' @export
 linear_regression <- function(x, y, silent = FALSE) {
   df <- data.frame(X = x, Y = y)
@@ -22,6 +27,8 @@ linear_regression <- function(x, y, silent = FALSE) {
   return(list(a = result$coefficients[2], b = result$coefficients[1]))
 }
 
+#' Dự đoán giá trị cho bài toán hồi quy tuyến tính đơn.
+#'
 #' Hàm này thực hiện tính và trả về kết quả dự đoán giá trị
 #' trong bài toán hồi quy tuyến tính đơn.
 #' @export
@@ -36,6 +43,8 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
   return(predict_value)
 }
 
+#' Tính các tổng hay dùng giữa x và y.
+#'
 #' Hàm này tính tất cả các giá trị tổng giữa x và y
 #' @export
 calculate_sum <- function (x, y, silent=FALSE) {

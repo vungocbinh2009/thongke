@@ -1,3 +1,5 @@
+#' Ước lượng cho giá trị trung bình (phân bố chuẩn)
+#'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 #' Hàm trả về các giá trị z_alpha, bottom, top
 #' mode có 3 chế độ: two.side
@@ -26,6 +28,8 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two.side", silent = 
               min = min, max = max))
 }
 
+#' Ước lượng cho giá trị trung bình (phân bố Student)
+#'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
 #' #' Hàm trả về các giá trị t_alpha, bottom, top
 #' mode có 3 chế độ: two.side
@@ -55,6 +59,8 @@ estimate_mean_t <- function(n, mean, s, alpha, mode = "two.side", silent = FALSE
               min = min, max = max))
 }
 
+#' Ước lượng khoảng cho phương sai
+#'
 #' Hàm này ước lượng khoảng cho phương sai.
 #' Hàm trả về các giá trị chi_sq_1, chi_sq_2,, bottom, top
 #' @export
@@ -84,6 +90,8 @@ estimate_var <- function(n, s, alpha, mode = "two.side", silent = FALSE) {
               min = min, max = max))
 }
 
+#' Ước lượng khoảng cho tỷ lệ.
+#'
 #' Hàm này ước lượng khoảng cho tỷ lệ
 #' Hàm trả về các giá trị z_alpha, bottom, top
 #' @export
@@ -118,6 +126,8 @@ estimate_prop <- function(n, f, alpha, mode = "two.side", silent = FALSE) {
               min = min, max = max))
 }
 
+#' Xác định kích thước mấu (TH ước lượng cho trung bình)
+#'
 #' Hàm này xác định kích thước mẫu cho trường hợp ước lượng giá trị trung bình.
 #' Hàm trả về các giá trị z_alpha, value - kết quả của phép tính
 #' @export
@@ -131,6 +141,8 @@ sample_size_mean <- function(sigma, eps, alpha, silent = FALSE) {
   return(list(z_alpha = z_alpha, value = value))
 }
 
+#' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 1)
+#'
 #' Hàm này xác đỉnh kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 1)
 #' Hàm trả về các giá trị z_alpha, value - kết quả của phép tính
 #' @export
@@ -144,6 +156,8 @@ sample_size_prop_1 <- function(f, eps, alpha, silent = FALSE) {
   return(list(z_alpha = z_alpha, value = value))
 }
 
+#' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 2)
+#'
 #' Hàm này xác định kích thước mẫu cho trường hợp ước lượng tỷ lệ (công thức 2)
 #' Hàm trả về các giá trị z_alpha, value - kết quả của phép tính
 #' @export

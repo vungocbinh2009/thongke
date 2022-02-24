@@ -1,3 +1,5 @@
+#' Kiểm định giả thiết về giá trị trung bình (phân bố chuẩn)
+#'
 #' Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố chuẩn
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
@@ -26,6 +28,8 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq", silent = F
   return(list(test = test, c = c, rejected = rejected))
 }
 
+#' Kiểm định giả thiết về giá trị trung bình (phân bố Student)
+#'
 #' Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố student
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
@@ -54,6 +58,8 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq", silent = FALSE) {
   return(list(test = test, c = c, rejected = rejected))
 }
 
+#' Kiểm định giả thiết về xác suất.
+#'
 #' Hàm này kiểm định giả thiết về xác suất
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
@@ -88,6 +94,8 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
   return(list(test = test, c = c, rejected = rejected))
 }
 
+#' Kiểm định sự phù hợp của k tỷ lệ.
+#'
 #' Hàm này thực hiện kiểm định khi bình phương
 #' actual, expect là các vector thể hiện tần số quan sát và tần số lý thuyết
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
@@ -104,6 +112,8 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
   return(list(test = test, c = c, rejected = abs(test) > c))
 }
 
+#' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố chuẩn)
+#'
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố chuẩn)
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
@@ -133,6 +143,8 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
   return(list(test = test, c = c, rejected = rejected))
 }
 
+#' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố Student)
+#'
 #' Hàm này so sánh 2 giá trị trung bình (dùng phân bố Student)
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s
@@ -162,6 +174,8 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq", silen
   return(list(test = test, c = c, s = s, rejected = rejected))
 }
 
+#' Kiểm định giả thiết: So sánh 2 tỷ lệ.
+#'
 #' Hàm này thực hiện so sánh 2 tỷ lệ
 #' Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c và tỷ lệ chung f
@@ -197,7 +211,9 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
   return(list(test = test, c = c, f = f, rejected = rejected))
 }
 
-#' Hàm này thưc hiện so sánh n tỷ lệ.
+#' Kiểm định giả thiết: So sánh k tỷ lệ.
+#'
+#' Hàm này thưc hiện so sánh k tỷ lệ.
 #' m_i, n_i là các vector thể hiện số quan sát có đặc tính A
 #' nào đó và tổng số quan sát trong các tập tổng thể.
 #' Hàm trả về kết quả của test thống kê (test), giá trị c và các giá trị m (sum_m_i),
@@ -225,6 +241,8 @@ test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
               sum_m_i = sum_m_i, sum_l_i = sum_l_i))
 }
 
+#' KIểm định tính độc lập.
+#'
 #' Hàm này thực hiện kiểm định tính độc lập của 2 dấu hiệu A và B
 #' matrix là một ma trận với các phần tử n_ij nằm trong bảng liên hợp các dấu hiệu
 #' (Contingency Table)
@@ -260,6 +278,7 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
          row_sums = row_sums, col_sums = col_sums, n = n))
 }
 
+#' Hàm này in kết luận của bài toán kiểm định giả thiết.
 print_test_result <- function (rejected) {
   if(rejected) {
     print("Kết luận: Bác bỏ H0")
