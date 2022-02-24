@@ -6,7 +6,12 @@ output:
 ---
 
 # thongke
-Một thư viện tính toán thống kê đơn giản, dễ sử dụng dành cho người dạy và người học
+A simple statistics package for students
+
+# Why ?
+- Một số bài toán trong môn Xác suất thống kê không có sẵn hàm trên R
+- Tự động tính các mức phân vị alpha và đưa ra kết luận
+- Just for fun :)
 
 # Install
 ```r
