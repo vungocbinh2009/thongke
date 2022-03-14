@@ -26,12 +26,6 @@ test_that("Test các data_* function", {
   data_simulate_test_independent(matrix(c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE),
                                  max_diff = 15, min_diff = -15, step = 200)
 
-  data_simulate_test_goodness_of_fit_2(c(100, 100, 100, 100, 100, 100),)
-
-  data_simulate_test_k_prop_2(c(160, 320, 240, 160), c(40, 80, 60, 40))
-
-  data_simulate_test_independent_2(matrix(c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE))
-
   expect_equal(1, 1)
 
 })

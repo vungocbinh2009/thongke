@@ -1,10 +1,10 @@
 #' Ước lượng cho giá trị trung bình (phân bố chuẩn)
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
-#' Hàm trả về các giá trị z_alpha, bottom, top
-#' mode có 3 chế độ: two.side
+#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two.side", silent = FALSE) {
+estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two_side", silent = FALSE) {
   z_alpha_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
   eps_2 <- z_alpha_2 * sigma / sqrt(n)
@@ -15,11 +15,11 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two.side", silent = 
   max <- mean + eps
   if (!silent) {
     print("Bài toán: Ước lượng khoảng cho trung bình (phân bố chuẩn)")
-    if(mode == "two.side") {
+    if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
-    } else if(mode == "min") {
+    } else if (mode == "min") {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
-    } else {
+    } else if (mode == "max") {
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
     }
   }
@@ -31,10 +31,10 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two.side", silent = 
 #' Ước lượng cho giá trị trung bình (phân bố Student)
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
-#' #' Hàm trả về các giá trị t_alpha, bottom, top
-#' mode có 3 chế độ: two.side
+#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_mean_t <- function(n, mean, s, alpha, mode = "two.side", silent = FALSE) {
+estimate_mean_t <- function(n, mean, s, alpha, mode = "two_side", silent = FALSE) {
   t_alpha_2 <- qt(1 - alpha/2,df = n - 1)
   t_alpha <- qt(1-alpha, df = n - 1)
   eps_2 <- t_alpha_2 * s / sqrt(n)
@@ -45,14 +45,13 @@ estimate_mean_t <- function(n, mean, s, alpha, mode = "two.side", silent = FALSE
   max <- mean + eps
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)")
-    if (mode == "two.side") {
+    if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (mode == "max") {
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
-    } else {
+    } else if (mode == "min") {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
-
   }
   return(list(t_alpha = t_alpha, t_alpha_2 = t_alpha_2,
               top = top, bottom = bottom,
@@ -62,9 +61,10 @@ estimate_mean_t <- function(n, mean, s, alpha, mode = "two.side", silent = FALSE
 #' Ước lượng khoảng cho phương sai
 #'
 #' Hàm này ước lượng khoảng cho phương sai.
-#' Hàm trả về các giá trị chi_sq_1, chi_sq_2,, bottom, top
+#' Hàm trả về các giá trị chi_sq_1, chi_sq_2, chi_sq_1_2 (chisq(1-a/2)), chi_sq_2_2 (chisq(a/2)), bottom, top, min, max.
+#' mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_var <- function(n, s, alpha, mode = "two.side", silent = FALSE) {
+estimate_var <- function(n, s, alpha, mode = "two_side", silent = FALSE) {
   chi_sq_1_2 <- qchisq(alpha / 2, df=n-1)
   chi_sq_2_2 <- qchisq(1 - alpha / 2, df=n-1)
   chi_sq_1 <- qchisq(alpha, df=n-1)
@@ -75,14 +75,13 @@ estimate_var <- function(n, s, alpha, mode = "two.side", silent = FALSE) {
   max <- (n-1) * s * s / chi_sq_1
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho phương sai")
-    if (mode == "two.side") {
+    if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (mode == "max") {
       printf("Khoảng tin cậy lớn nhất là: (0; %.4f)", max)
-    } else {
+    } else if (mode == "min") {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
-
   }
   return(list(chi_sq_1 = chi_sq_1, chi_sq_2 = chi_sq_2,
               chi_sq_1_2 = chi_sq_1_2, chi_sq_2_2 = chi_sq_2_2,
@@ -93,9 +92,10 @@ estimate_var <- function(n, s, alpha, mode = "two.side", silent = FALSE) {
 #' Ước lượng khoảng cho tỷ lệ.
 #'
 #' Hàm này ước lượng khoảng cho tỷ lệ
-#' Hàm trả về các giá trị z_alpha, bottom, top
+#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_prop <- function(n, f, alpha, mode = "two.side", silent = FALSE) {
+estimate_prop <- function(n, f, alpha, mode = "two_side", silent = FALSE) {
   if(!check_estimate_prop(n, f)) {
     if(!silent) {
       print("Không đủ điều kiện áp dụng test thống kê")
@@ -113,11 +113,11 @@ estimate_prop <- function(n, f, alpha, mode = "two.side", silent = FALSE) {
   max <- f + eps
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho tỷ lệ")
-    if(mode == "two.side") {
+    if(mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if(mode == "max") {
       printf("Khoảng tin cậy lớn nhất là: (0; %.4f)", max)
-    } else {
+    } else if(mode == "min") {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; 1)", min)
     }
   }

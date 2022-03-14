@@ -281,7 +281,7 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
 #' Hàm này in kết luận của bài toán kiểm định giả thiết.
 print_test_result <- function (rejected) {
   if(rejected) {
-    print("Kết luận: Bác bỏ H0")
+    print("Kết luận: Bác bỏ H0, chấp nhận H1")
   } else {
     print("Kết luận: Chưa đủ cơ sở để bác bỏ H0")
   }
