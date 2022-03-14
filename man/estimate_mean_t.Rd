@@ -4,10 +4,10 @@
 \alias{estimate_mean_t}
 \title{Ước lượng cho giá trị trung bình (phân bố Student)}
 \usage{
-estimate_mean_t(n, mean, s, alpha, mode = "two.side", silent = FALSE)
+estimate_mean_t(n, mean, s, alpha, mode = "two_side", silent = FALSE)
 }
 \description{
 Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
-#' Hàm trả về các giá trị t_alpha, bottom, top
-mode có 3 chế độ: two.side
+Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 }
