@@ -38,7 +38,7 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
   predict_value <- result$coefficients[1] + value * result$coefficients[2]
   if(!silent) {
     printf("Bài toán: Dự báo giá trị, dựa vào hồi quy tuyến tính đơn")
-    printf("Giá trị của Y là: %.4f", value)
+    printf("Giá trị của Y là: %.4f", predict_value)
   }
   return(predict_value)
 }
