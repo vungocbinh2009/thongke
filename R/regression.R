@@ -8,7 +8,7 @@ correlation <- function(x, y, silent = FALSE) {
     print("Bài toán: Tính hệ số tương quan")
     printf("Hệ số tương quan: %.4f", cor)
   }
-  return(cor)
+  invisible(cor)
 }
 
 #' Bài toán hồi quy tuyến tính đơn.
@@ -24,7 +24,7 @@ linear_regression <- function(x, y, silent = FALSE) {
     printf("Hệ số tự do: %.4f", result$coefficients[1])
     printf("Hệ số ứng với x: %.4f", result$coefficients[2])
   }
-  return(list(a = result$coefficients[2], b = result$coefficients[1]))
+  invisible(list(a = result$coefficients[2], b = result$coefficients[1]))
 }
 
 #' Dự đoán giá trị cho bài toán hồi quy tuyến tính đơn.
@@ -40,7 +40,7 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
     printf("Bài toán: Dự báo giá trị, dựa vào hồi quy tuyến tính đơn")
     printf("Giá trị của Y là: %.4f", predict_value)
   }
-  return(predict_value)
+  invisible(predict_value)
 }
 
 #' Tính các tổng hay dùng giữa x và y.
@@ -60,7 +60,7 @@ calculate_sum <- function (x, y, silent=FALSE) {
     printf("Tổng x2: %.4f", sum_x2)
     printf("Tổng y2: %.4f", sum_y2)
   }
-  return(list(
+  invisible(list(
     sum_x = sum_x,
     sum_y = sum_y,
     sum_xy = sum_xy,

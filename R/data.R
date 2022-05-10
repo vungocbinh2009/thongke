@@ -12,7 +12,7 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
   if(!silent) {
     print(table(df$data1))
   }
-  return(data)
+  invisible(data)
 }
 
 #' Tạo dữ liệu liên tục.
@@ -32,7 +32,7 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
   if(!silent) {
     print(with(df, table(data.cut, useNA='ifany')))
   }
-  return(df$cal_data)
+  invisible(df$cal_data)
 }
 
 #' Tạo dữ liệu cho bài toán hồi quy tuyến tính
@@ -60,7 +60,7 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
   if(!silent) {
     print(df)
   }
-  return(list(x = x, y = y))
+  invisible(list(x = x, y = y))
 }
 
 #' Dữ liệu cho bài toán kiểm định khi bình phương.
@@ -74,7 +74,7 @@ data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
   if(!silent) {
     print(freq)
   }
-  return(freq)
+  invisible(freq)
 }
 
 #' Dữ liệu cho bài toán kiểm định k tỷ lệ.
@@ -90,7 +90,7 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE)
   if(!silent) {
     print(matrix)
   }
-  return(matrix)
+  invisible(matrix)
 }
 
 #' Dữ liệu cho bài toán kiểm định tính độc lập.
@@ -107,7 +107,7 @@ data_simulate_test_independent <- function (expected_matrix, silent=FALSE) {
   if(!silent) {
     print(matrix)
   }
-  return(matrix)
+  invisible(matrix)
 }
 
 #' Hàm này xây dựng cut_vector cho hàm data_simulate_regression

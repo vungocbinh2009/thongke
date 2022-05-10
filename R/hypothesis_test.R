@@ -25,7 +25,7 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq", silent = F
     printf("Kết quả của c: %.4f", c)
     print_test_result(rejected)
   }
-  return(list(test = test, c = c, rejected = rejected))
+  invisible(list(test = test, c = c, rejected = rejected))
 }
 
 #' Kiểm định giả thiết về giá trị trung bình (phân bố Student)
@@ -55,7 +55,7 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq", silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(rejected)
   }
-  return(list(test = test, c = c, rejected = rejected))
+  invisible(list(test = test, c = c, rejected = rejected))
 }
 
 #' Kiểm định giả thiết về xác suất.
@@ -91,7 +91,7 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(rejected)
   }
-  return(list(test = test, c = c, rejected = rejected))
+  invisible(list(test = test, c = c, rejected = rejected))
 }
 
 #' Kiểm định sự phù hợp của k tỷ lệ.
@@ -109,7 +109,7 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c, rejected = abs(test) > c))
+  invisible(list(test = test, c = c, rejected = abs(test) > c))
 }
 
 #' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố chuẩn)
@@ -140,7 +140,7 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
     print_test_result(rejected)
   }
 
-  return(list(test = test, c = c, rejected = rejected))
+  invisible(list(test = test, c = c, rejected = rejected))
 }
 
 #' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố Student)
@@ -171,7 +171,7 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq", silen
     printf("Kết quả của c: %.4f", c)
     print_test_result(rejected)
   }
-  return(list(test = test, c = c, s = s, rejected = rejected))
+  invisible(list(test = test, c = c, s = s, rejected = rejected))
 }
 
 #' Kiểm định giả thiết: So sánh 2 tỷ lệ.
@@ -208,7 +208,7 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(rejected)
   }
-  return(list(test = test, c = c, f = f, rejected = rejected))
+  invisible(list(test = test, c = c, f = f, rejected = rejected))
 }
 
 #' Kiểm định giả thiết: So sánh k tỷ lệ.
@@ -237,7 +237,7 @@ test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
+  invisible(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
               sum_m_i = sum_m_i, sum_l_i = sum_l_i))
 }
 
@@ -274,7 +274,7 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
     printf("Kết quả của c: %.4f", c)
     print_test_result(abs(test) > c)
   }
-  return(list(test = test, c = c, rejected = abs(test) > c,
+  invisible(list(test = test, c = c, rejected = abs(test) > c,
          row_sums = row_sums, col_sums = col_sums, n = n))
 }
 

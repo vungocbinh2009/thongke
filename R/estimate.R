@@ -23,7 +23,7 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two_side", silent = 
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
     }
   }
-  return(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
+  invisible(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
               top = top, bottom = bottom,
               min = min, max = max))
 }
@@ -53,7 +53,7 @@ estimate_mean_t <- function(n, mean, s, alpha, mode = "two_side", silent = FALSE
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
   }
-  return(list(t_alpha = t_alpha, t_alpha_2 = t_alpha_2,
+  invisible(list(t_alpha = t_alpha, t_alpha_2 = t_alpha_2,
               top = top, bottom = bottom,
               min = min, max = max))
 }
@@ -83,7 +83,7 @@ estimate_var <- function(n, s, alpha, mode = "two_side", silent = FALSE) {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
   }
-  return(list(chi_sq_1 = chi_sq_1, chi_sq_2 = chi_sq_2,
+  invisible(list(chi_sq_1 = chi_sq_1, chi_sq_2 = chi_sq_2,
               chi_sq_1_2 = chi_sq_1_2, chi_sq_2_2 = chi_sq_2_2,
               bottom = bottom, top = top,
               min = min, max = max))
@@ -121,7 +121,7 @@ estimate_prop <- function(n, f, alpha, mode = "two_side", silent = FALSE) {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; 1)", min)
     }
   }
-  return(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
+  invisible(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
               bottom = bottom, top = top,
               min = min, max = max))
 }
@@ -138,7 +138,7 @@ sample_size_mean <- function(sigma, eps, alpha, silent = FALSE) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng trung bình)")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  return(list(z_alpha = z_alpha, value = value))
+  invisible(list(z_alpha = z_alpha, value = value))
 }
 
 #' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 1)
@@ -153,7 +153,7 @@ sample_size_prop_1 <- function(f, eps, alpha, silent = FALSE) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, đã biết f)")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  return(list(z_alpha = z_alpha, value = value))
+  invisible(list(z_alpha = z_alpha, value = value))
 }
 
 #' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 2)
@@ -168,5 +168,5 @@ sample_size_prop_2 <- function(eps, alpha, silent = FALSE) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, chưa biết f)")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  return(list(z_alpha = z_alpha, value = value))
+  invisible(list(z_alpha = z_alpha, value = value))
 }
