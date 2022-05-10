@@ -27,5 +27,4 @@ test_that("Test các data_* function", {
                                  max_diff = 15, min_diff = -15, step = 200)
 
   expect_equal(1, 1)
-
 })
