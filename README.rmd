@@ -3,9 +3,19 @@ title: "R Notebook"
 output:
   md_document:
     variant: markdown_github
-    toc: true
-    toc_depth: 1
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+devtools::source_gist("c83e078bf8c81b035e32c3fc0cf04ee8",
+                      filename = 'render_toc.R')
+```
+
+# Table of Contents
+
+```{r toc, echo=FALSE}
+render_toc("README.rmd", toc_depth=2)
+```
 
 # Introduction
 A simple statistics package for students
@@ -24,12 +34,12 @@ devtools::install_github("vungocbinh2009/thongke")
 ```
 
 # How to use
-### Generate data
+## Generate data
 ```{r, code = readLines("./tests/testthat/test-data.R")}
 
 ```
 
-### Calculate
+## Calculate
 ```{r, code = readLines("./tests/testthat/test-calculate.R")}
 
 ```
