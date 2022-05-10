@@ -1,14 +1,24 @@
-# thongke
+-   [Introduction](#introduction)
+-   [Why ?](#why)
+-   [Install](#install)
+-   [How to use](#how-to-use)
+-   [License](#license)
+
+Introduction
+============
 
 A simple statistics package for students
 
-# Why ?
+Why ?
+=====
 
-  - Một số bài toán trong môn Xác suất thống kê không có sẵn hàm trên R
-  - Tự động tính các mức phân vị alpha và đưa ra kết luận
-  - Just for fun :)
+-   Some exercises in statistics do not have functions in R and need
+    3rd-party packages.
+-   Calculate hypothesis testing exercises use traditional method.
+-   Just for fun :grinning:
 
-# Install
+Install
+=======
 
 ``` r
 # Install devtools
@@ -17,7 +27,8 @@ install.packages("devtools")
 devtools::install_github("vungocbinh2009/thongke")
 ```
 
-# How to use
+How to use
+==========
 
 ### Generate data
 
@@ -32,8 +43,7 @@ test_that("Test các data_* function", {
   data_2 <- data_simulate_continuous(n = 100, mean = 5, sd = 2, min = 2, max = 8, size = 1)
   print(mean(data_2))
   print(var(data_2))
-  data_3 <- data_simulate_regression(n = 10, min_x = 15, max_x = 30, b0 = 5, b1 = 10,
-                           sd_eps = 3, round_digits = 2)
+  data_3 <- data_simulate_regression(n = 10, min_x = 15, max_x = 30, b0 = 5, b1 = 10, sd_eps = 3, round_digits = 2)
   x <- data_3$x
   y <- data_3$y
   print(mean(x))
@@ -41,47 +51,56 @@ test_that("Test các data_* function", {
   print(mean(y))
   print(var(y))
 
-  data_simulate_test_goodness_of_fit(c(100, 100, 100, 100, 100, 100),
-                                     max_diff = 30, min_diff = -30, step = 50)
+  data_simulate_test_goodness_of_fit(
+    c(100, 100, 100, 100, 100, 100),
+  )
 
-  data_simulate_test_k_prop(c(160, 320, 240, 160), c(40, 80, 60, 40),
-                            max_diff = 10, min_diff = -10, step = 50)
+  data_simulate_test_k_prop(
+    c(160, 320, 240, 160), c(40, 80, 60, 40),
+  )
 
-  data_simulate_test_independent(matrix(c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE),
-                                 max_diff = 15, min_diff = -15, step = 200)
+  data_simulate_test_independent(matrix(
+    c(100, 200, 300, 400, 500, 600, 700, 800, 900), nrow=3, ncol=3, byrow = TRUE)
+  )
 
   expect_equal(1, 1)
-
 })
 ```
 
     ## 
     ##  2  3  4  5  6  7  8 
-    ##  8 15 22 23 18 11  3 
-    ## [1] 4.73
-    ## [1] 2.380909
+    ##  2 13 15 19 28 18  5 
+    ## [1] 5.32
+    ## [1] 2.219798
     ## data.cut
     ## (2,3] (3,4] (4,5] (5,6] (6,7] (7,8] 
-    ##    11    14    22    26    15    12 
-    ## [1] 5.06
-    ## [1] 2.228687
+    ##    12    17    20    24    18     9 
+    ## [1] 4.96
+    ## [1] 2.230707
     ##        x      y
-    ## 9  16.15 173.00
-    ## 7  18.08 185.28
-    ## 10 21.21 216.87
-    ## 5  22.14 228.90
-    ## 8  22.80 234.33
-    ## 1  25.00 249.21
-    ## 4  26.79 272.94
-    ## 2  27.55 283.63
-    ## 6  28.03 283.79
-    ## 3  29.00 296.45
-    ## [1] 23.675
-    ## [1] 18.99154
-    ## [1] 242.44
-    ## [1] 1810.19
-    ## ── Error (<text>:20:3): Test các data_* function ───────────────────────────────
-    ## Error: unused arguments (max_diff = 30, min_diff = -30, step = 50)
+    ## 3  16.27 167.54
+    ## 1  17.25 174.90
+    ## 2  17.59 180.95
+    ## 6  18.50 188.89
+    ## 8  20.89 218.35
+    ## 5  23.67 230.88
+    ## 10 24.55 250.47
+    ## 7  27.55 282.14
+    ## 4  29.01 296.66
+    ## 9  29.35 296.70
+    ## [1] 22.463
+    ## [1] 25.49316
+    ## [1] 228.748
+    ## [1] 2576.007
+    ## [1] 103 110 104  95  84 104
+    ##      [,1] [,2] [,3] [,4]
+    ## [1,]  158  314  258  148
+    ## [2,]   35   75   68   44
+    ##      [,1] [,2] [,3]
+    ## [1,]   92  197  309
+    ## [2,]  417  524  632
+    ## [3,]  709  745  875
+    ## Test passed 😸
 
 ### Calculate
 
@@ -271,7 +290,7 @@ test_that("Test các trường hợp cụ thể", {
     ## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)"
     ## [1] "Kết quả test thống kê: 3.0000"
     ## [1] "Kết quả của c: 1.9600"
-    ## [1] "Kết luận: Bác bỏ H0"
+    ## [1] "Kết luận: Bác bỏ H0, chấp nhận H1"
     ## [1] "==================================================="
     ## [1] "Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)"
     ## [1] "Kết quả test thống kê: -1.1619"
@@ -291,7 +310,7 @@ test_that("Test các trường hợp cụ thể", {
     ## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)"
     ## [1] "Kết quả test thống kê: -5.0000"
     ## [1] "Kết quả của c: 2.5758"
-    ## [1] "Kết luận: Bác bỏ H0"
+    ## [1] "Kết luận: Bác bỏ H0, chấp nhận H1"
     ## [1] "==================================================="
     ## [1] "Bài toán: So sánh 2 giá trị trung bình (phân bố Student)"
     ## [1] "Kết quả test thống kê: 1.1736"
@@ -324,9 +343,10 @@ test_that("Test các trường hợp cụ thể", {
     ## [1] "Tổng xy: 138800.0000"
     ## [1] "Tổng x2: 1540000.0000"
     ## [1] "Tổng y2: 12718.0000"
-    ## Test passed 😸
+    ## Test passed 🌈
 
-# License
+License
+=======
 
 MIT License
 

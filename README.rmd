@@ -2,16 +2,18 @@
 title: "R Notebook"
 output:
   md_document:
-    variant: gfm
+    variant: markdown_github
+    toc: true
+    toc_depth: 1
 ---
 
-# thongke
+# Introduction
 A simple statistics package for students
 
 # Why ?
-- Một số bài toán trong môn Xác suất thống kê không có sẵn hàm trên R
-- Tự động tính các mức phân vị alpha và đưa ra kết luận
-- Just for fun :)
+- Some exercises in statistics do not have functions in R and need 3rd-party packages.
+- Calculate hypothesis testing exercises use traditional method.
+- Just for fun :grinning:
 
 # Install
 ```r
