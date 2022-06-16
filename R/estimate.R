@@ -2,9 +2,9 @@
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
-#' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
+#' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_side", silent = FALSE) {
+estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_sided", silent = FALSE) {
   z_alpha_div_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
   eps_2 <- z_alpha_div_2 * sigma / sqrt(n)
@@ -18,7 +18,7 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_side", si
     print("Input")
     print_huxtable(data.frame(n = n, mean = mean, sigma = sigma, alpha = alpha, alternative = alternative))
     print("Output")
-    if (alternative == "two.side" | alternative == "two_side") {
+    if (alternative == "two_sided") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (alternative == "min") {
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
@@ -43,9 +43,9 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_side", si
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
-#' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
+#' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent = FALSE) {
+estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_sided", silent = FALSE) {
   t_alpha_div_2 <- qt(1 - alpha/2,df = n - 1)
   t_alpha <- qt(1-alpha, df = n - 1)
   eps_2 <- t_alpha_div_2 * s / sqrt(n)
@@ -59,7 +59,7 @@ estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent 
     print("Input")
     print_huxtable(data.frame(n = n, mean = mean, s = s, alpha = alpha, alternative = alternative))
     print("Output")
-    if (alternative == "two.side" | alternative == "two_side") {
+    if (alternative == "two_sided") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (alternative == "max") {
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
@@ -84,9 +84,9 @@ estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent 
 #'
 #' Hàm này ước lượng khoảng cho phương sai.
 #' Hàm trả về các giá trị chi_sq_1, chi_sq_2, chi_sq_1_2 (chisq(1-a/2)), chi_sq_2_2 (chisq(a/2)), bottom, top, min, max.
-#' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
+#' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_var <- function(n, s, alpha, alternative = "two_side", silent = FALSE) {
+estimate_var <- function(n, s, alpha, alternative = "two_sided", silent = FALSE) {
   chi_sq_2_div_2 <- qchisq(alpha / 2, df=n-1)
   chi_sq_1_div_2 <- qchisq(1 - alpha / 2, df=n-1)
   chi_sq_2 <- qchisq(alpha, df=n-1)
@@ -100,7 +100,7 @@ estimate_var <- function(n, s, alpha, alternative = "two_side", silent = FALSE) 
     print("Input")
     print_huxtable(data.frame(n = n, s = s, alpha = alpha, alternative = alternative))
     print("Output")
-    if (alternative == "two.side" | alternative == "two_side") {
+    if (alternative == "two_sided") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (alternative == "max") {
       printf("Khoảng tin cậy lớn nhất là: (0; %.4f)", max)
@@ -125,9 +125,9 @@ estimate_var <- function(n, s, alpha, alternative = "two_side", silent = FALSE) 
 #'
 #' Hàm này ước lượng khoảng cho tỷ lệ
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
-#' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
+#' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
-estimate_prop <- function(n, f, alpha, alternative = "two_side", silent = FALSE) {
+estimate_prop <- function(n, f, alpha, alternative = "two_sided", silent = FALSE) {
   if(!check_estimate_prop(n, f)) {
     if(!silent) {
       print("Không đủ điều kiện áp dụng test thống kê")
@@ -148,7 +148,7 @@ estimate_prop <- function(n, f, alpha, alternative = "two_side", silent = FALSE)
     print("Input")
     print_huxtable(data.frame(n = n, f = f, alpha = alpha, alternative = alternative))
     print("Output")
-    if(alternative == "two.side" | alternative == "two_side") {
+    if(alternative == "two_sided") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if(alternative == "max") {
       printf("Khoảng tin cậy lớn nhất là: (0; %.4f)", max)
