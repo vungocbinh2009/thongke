@@ -22,12 +22,24 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, alternative="neq", sil
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)")
     print("Input")
-    print_huxtable(data.frame(n = n, mean = mean, mean_0 = mean_0, sigma = sigma, alpha = alpha, alternative = alternative))
+    print_huxtable(
+      data.frame(n = n, mean = mean, mean_0 = mean_0,
+                 sigma = sigma, alpha = alpha, alternative = alternative
+      )
+    )
     print("Output")
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-  invisible(list(test = test, c = c, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, mean_0 = mean_0,
+      sigma = sigma, alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      test = test, c = c, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định giả thiết về giá trị trung bình (phân bố Student)
@@ -59,7 +71,14 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, alternative="neq", silent = F
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-  invisible(list(test = test, c = c, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, mean_0 = mean_0, s = s, alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      test = test, c = c, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định giả thiết về xác suất.
@@ -97,7 +116,14 @@ test_prop <- function(n, f, p_0, alpha, alternative="neq", silent = FALSE) {
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-  invisible(list(test = test, c = c, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = n, f = f, p_0 = p_0, alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      test = test, c = c, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định sự phù hợp của k tỷ lệ.
@@ -107,7 +133,7 @@ test_prop <- function(n, f, p_0, alpha, alternative="neq", silent = FALSE) {
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
 test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
-  test <- sum((actual - expected)*(actual - expected) / expected)
+  test <- sum((actual - expected)^2 / expected)
   c <- qchisq(1 - alpha, df=length(actual)-1)
   if(!silent) {
     print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
@@ -118,7 +144,14 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
-  invisible(list(test = test, c = c, rejected = abs(test) > c))
+  invisible(list(
+    input_data = list(
+      actual = actual, expected = expected, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, rejected = abs(test) > c
+    )
+  ))
 }
 
 #' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố chuẩn)
@@ -151,8 +184,14 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, altern
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-
-  invisible(list(test = test, c = c, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = c(n1, n2), mean = c(mean1, mean2), sigma = c(sigma1, sigma2), alternative = alternative, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định giả thiết: So sánh 2 giá trị trung bình (phân bố Student)
@@ -162,8 +201,8 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, altern
 #' Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s
 #' @export
 test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, alternative="neq", silent = FALSE) {
-  s <- ((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2)
-  test <- (mean1 - mean2) / (sqrt(s) * sqrt(1/n1 + 1/n2))
+  s_squared <- ((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2)
+  test <- (mean1 - mean2) / (sqrt(s_squared) * sqrt(1/n1 + 1/n2))
   c <- switch(
     alternative,
     "neq" = qt(1 - alpha / 2, df=n1+n2-2),
@@ -186,7 +225,14 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, alternative="neq"
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-  invisible(list(test = test, c = c, s = s, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = c(n1, n2), mean = c(mean1, mean2), s = c(s1, s2), alternative = alternative, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, s_squared = s_squared, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định giả thiết: So sánh 2 tỷ lệ.
@@ -226,7 +272,14 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, alternative="neq", silent = FALSE
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
-  invisible(list(test = test, c = c, f = f, rejected = rejected))
+  invisible(list(
+    input_data = list(
+      n = c(n1, n2), f = c(f1, f2), alternative = alternative, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, f = f, rejected = rejected
+    )
+  ))
 }
 
 #' Kiểm định giả thiết: So sánh k tỷ lệ.
@@ -258,8 +311,15 @@ test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
-  invisible(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
-              sum_m_i = sum_m_i, sum_l_i = sum_l_i))
+  invisible(list(
+    input_data = list(
+      m_i = m_i, n_i = n_i, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
+      sum_m_i = sum_m_i, sum_l_i = sum_l_i
+    )
+  ))
 }
 
 #' KIểm định tính độc lập.
@@ -298,8 +358,15 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
     print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
-  invisible(list(test = test, c = c, rejected = abs(test) > c,
-         row_sums = row_sums, col_sums = col_sums, n = n))
+  invisible(list(
+    input_data = list(
+      matrix = matrix, alpha = alpha
+    ),
+    output_data = list(
+      test = test, c = c, rejected = abs(test) > c,
+      row_sums = row_sums, col_sums = col_sums, n = n
+    )
+  ))
 }
 
 #' Hàm này in kết luận của bài toán kiểm định giả thiết.

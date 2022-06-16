@@ -1,13 +1,13 @@
 #' Ước lượng cho giá trị trung bình (phân bố chuẩn)
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
-#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
 estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_side", silent = FALSE) {
-  z_alpha_2 <- qnorm(1-alpha/2)
+  z_alpha_div_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
-  eps_2 <- z_alpha_2 * sigma / sqrt(n)
+  eps_2 <- z_alpha_div_2 * sigma / sqrt(n)
   eps <- z_alpha * sigma / sqrt(n)
   top <- mean + eps_2
   bottom <- mean - eps_2
@@ -26,21 +26,29 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_side", si
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
     }
   }
-  invisible(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
-              top = top, bottom = bottom,
-              min = min, max = max))
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, sigma = sigma,
+      alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      z_alpha = z_alpha, z_alpha_div_2 = z_alpha_div_2,
+      top = top, bottom = bottom,
+      min = min, max = max
+    )
+  ))
 }
 
 #' Ước lượng cho giá trị trung bình (phân bố Student)
 #'
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố Student
-#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
 estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent = FALSE) {
-  t_alpha_2 <- qt(1 - alpha/2,df = n - 1)
+  t_alpha_div_2 <- qt(1 - alpha/2,df = n - 1)
   t_alpha <- qt(1-alpha, df = n - 1)
-  eps_2 <- t_alpha_2 * s / sqrt(n)
+  eps_2 <- t_alpha_div_2 * s / sqrt(n)
   eps <- t_alpha * s / sqrt(n)
   top <- mean + eps_2
   bottom <- mean - eps_2
@@ -59,9 +67,17 @@ estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent 
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
   }
-  invisible(list(t_alpha = t_alpha, t_alpha_2 = t_alpha_2,
-              top = top, bottom = bottom,
-              min = min, max = max))
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, s = s,
+      alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      t_alpha = t_alpha, t_alpha_div_2 = t_alpha_div_2,
+      top = top, bottom = bottom,
+      min = min, max = max
+    )
+  ))
 }
 
 #' Ước lượng khoảng cho phương sai
@@ -71,14 +87,14 @@ estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_side", silent 
 #' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
 estimate_var <- function(n, s, alpha, alternative = "two_side", silent = FALSE) {
-  chi_sq_1_2 <- qchisq(alpha / 2, df=n-1)
-  chi_sq_2_2 <- qchisq(1 - alpha / 2, df=n-1)
-  chi_sq_1 <- qchisq(alpha, df=n-1)
-  chi_sq_2 <- qchisq(1 - alpha, df=n-1)
-  bottom <- (n-1) * s * s / chi_sq_2_2
-  top <- (n-1) * s * s / chi_sq_1_2
-  min <- (n-1) * s * s / chi_sq_2
-  max <- (n-1) * s * s / chi_sq_1
+  chi_sq_2_div_2 <- qchisq(alpha / 2, df=n-1)
+  chi_sq_1_div_2 <- qchisq(1 - alpha / 2, df=n-1)
+  chi_sq_2 <- qchisq(alpha, df=n-1)
+  chi_sq_1 <- qchisq(1 - alpha, df=n-1)
+  bottom <- (n-1) * s * s / chi_sq_1_div_2
+  top <- (n-1) * s * s / chi_sq_2_div_2
+  min <- (n-1) * s * s / chi_sq_1
+  max <- (n-1) * s * s / chi_sq_2
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho phương sai")
     print("Input")
@@ -92,16 +108,23 @@ estimate_var <- function(n, s, alpha, alternative = "two_side", silent = FALSE) 
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; +inf)", min)
     }
   }
-  invisible(list(chi_sq_1 = chi_sq_1, chi_sq_2 = chi_sq_2,
-              chi_sq_1_2 = chi_sq_1_2, chi_sq_2_2 = chi_sq_2_2,
-              bottom = bottom, top = top,
-              min = min, max = max))
+  invisible(list(
+    input_data = list(
+      n = n, s = s, alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      hi_sq_2 = chi_sq_2, chi_sq_1 = chi_sq_1,
+      chi_sq_2_div_2 = chi_sq_2_div_2, chi_sq_1_div_2 = chi_sq_1_div_2,
+      bottom = bottom, top = top,
+      min = min, max = max
+    )
+  ))
 }
 
 #' Ước lượng khoảng cho tỷ lệ.
 #'
 #' Hàm này ước lượng khoảng cho tỷ lệ
-#' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
+#' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
 estimate_prop <- function(n, f, alpha, alternative = "two_side", silent = FALSE) {
@@ -112,9 +135,9 @@ estimate_prop <- function(n, f, alpha, alternative = "two_side", silent = FALSE)
     return()
   }
 
-  z_alpha_2 <- qnorm(1-alpha/2)
+  z_alpha_div_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
-  eps_2 <- z_alpha_2 * sqrt(f * (1-f) / n)
+  eps_2 <- z_alpha_div_2 * sqrt(f * (1-f) / n)
   eps <- z_alpha * sqrt(f * (1-f) / n)
   bottom <- f - eps_2
   top <- f + eps_2
@@ -133,9 +156,16 @@ estimate_prop <- function(n, f, alpha, alternative = "two_side", silent = FALSE)
       printf("Khoảng tin cậy nhỏ nhất là: (%.4f; 1)", min)
     }
   }
-  invisible(list(z_alpha = z_alpha, z_alpha_2 = z_alpha_2,
-              bottom = bottom, top = top,
-              min = min, max = max))
+  invisible(list(
+    input_data = list(
+      n = n, f = f, alpha = alpha, alternative = alternative
+    ),
+    output_data = list(
+      z_alpha = z_alpha, z_alpha_div_2 = z_alpha_div_2,
+      bottom = bottom, top = top,
+      min = min, max = max
+    )
+  ))
 }
 
 #' Xác định kích thước mấu (TH ước lượng cho trung bình)
@@ -153,7 +183,14 @@ sample_size_mean <- function(sigma, eps, alpha, silent = FALSE) {
     print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  invisible(list(z_alpha = z_alpha, value = value))
+  invisible(list(
+    input_data = list(
+      sigma = sigma, eps = eps, alpha = alpha
+    ),
+    output_data = list(
+      z_alpha = z_alpha, value = value
+    )
+  ))
 }
 
 #' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 1)
@@ -171,7 +208,14 @@ sample_size_prop_1 <- function(f, eps, alpha, silent = FALSE) {
     print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  invisible(list(z_alpha = z_alpha, value = value))
+  invisible(list(
+    input_data = list(
+      f = f, eps = eps, alpha = alpha
+    ),
+    output_data = list(
+      z_alpha = z_alpha, value = value
+    )
+  ))
 }
 
 #' xác đỉnh kích thước mẫu (TH ước lượng tỷ lệ, công thức 2)
@@ -189,5 +233,12 @@ sample_size_prop_2 <- function(eps, alpha, silent = FALSE) {
     print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
-  invisible(list(z_alpha = z_alpha, value = value))
+  invisible(list(
+    input_data = list(
+      eps = eps, alpha = alpha
+    ),
+    output_data = list(
+      z_alpha = z_alpha, value = value
+    )
+  ))
 }
