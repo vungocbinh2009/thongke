@@ -2,14 +2,11 @@
 % Please edit documentation in R/util.R
 \name{get_alpha}
 \alias{get_alpha}
-\title{Hàm này dùng để tìm giá trị alpha từ giá trị z_alpha cho trước (phân bố chuẩn)
-Hàm này có thể dùng để truyền trực tiếp giá trị z_alpha vào các hàm, từ đó thu được kết quả sát với
-kết quả thu được khi tính toán bằng tay hơn.}
+\title{Hàm này dùng để tìm giá trị alpha từ giá trị z_alpha cho trước (phân bố chuẩn)}
 \usage{
 get_alpha(z_alpha, two_side = TRUE)
 }
 \description{
-Hàm này dùng để tìm giá trị alpha từ giá trị z_alpha cho trước (phân bố chuẩn)
 Hàm này có thể dùng để truyền trực tiếp giá trị z_alpha vào các hàm, từ đó thu được kết quả sát với
 kết quả thu được khi tính toán bằng tay hơn.
 }
