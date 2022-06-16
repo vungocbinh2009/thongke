@@ -15,7 +15,15 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
     print("Output")
     print_huxtable(t(as.data.frame(table(data))))
   }
-  invisible(data)
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, sd = sd,
+      min = min, max = max, round_digits = round_digits
+    ),
+    output_data = list(
+      data = data
+    )
+  ))
 }
 
 #' Tạo dữ liệu liên tục.
@@ -39,7 +47,14 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
     print("Output")
     print_huxtable(t(with(df, table(data.cut, useNA='ifany'))))
   }
-  invisible(df$cal_data)
+  invisible(list(
+    input_data = list(
+      n = n, mean = mean, sd = sd, min = min, max = max, size = size
+    ),
+    output_data = list(
+      data = df$cal_data
+    )
+  ))
 }
 
 #' Tạo dữ liệu cho bài toán hồi quy tuyến tính
@@ -74,9 +89,17 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
       )
     )
     print("Output")
-    print_huxtable(df)
+    print_huxtable(t(df))
   }
-  invisible(list(x = x, y = y))
+  invisible(list(
+    input_data = list(
+      n = n, min_x = min_x, max_x = max_x,
+      b0 = b0, b1 = b1, sd_eps = sd_eps, round_digits = round_digits
+    ),
+    output_data = list(
+      x = x, y = y
+    )
+  ))
 }
 
 #' Dữ liệu cho bài toán kiểm định khi bình phương.
@@ -94,7 +117,14 @@ data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
     print("Output")
     print_huxtable(t(freq))
   }
-  invisible(freq)
+  invisible(list(
+    input_data = list(
+      expected = expected
+    ),
+    output_data = list(
+      freq = freq
+    )
+  ))
 }
 
 #' Dữ liệu cho bài toán kiểm định k tỷ lệ.
@@ -114,7 +144,14 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE)
     print("Output")
     print_huxtable(matrix)
   }
-  invisible(matrix)
+  invisible(list(
+    input_data = list(
+      expected_m_i = expected_m_i, expected_l_i = expected_l_i
+    ),
+    output_data = list(
+      matrix = matrix
+    )
+  ))
 }
 
 #' Dữ liệu cho bài toán kiểm định tính độc lập.
@@ -135,7 +172,14 @@ data_simulate_test_independent <- function (expected_matrix, silent=FALSE) {
     print("Output")
     print_huxtable(matrix)
   }
-  invisible(matrix)
+  invisible(list(
+    input_data = list(
+      expected_matrix = expected_matrix
+    ),
+    output_data = list(
+      matrix = matrix
+    )
+  ))
 }
 
 #' Hàm này xây dựng cut_vector cho hàm data_simulate_regression

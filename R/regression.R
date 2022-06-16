@@ -10,7 +10,14 @@ correlation <- function(x, y, silent = FALSE) {
     str(data.frame(x, y))
     printf("Hệ số tương quan: %.4f", cor)
   }
-  invisible(cor)
+  invisible(list(
+    input_data = list(
+      x = x, y = y
+    ),
+    output_data = list(
+      cor = cor
+    )
+  ))
 }
 
 #' Bài toán hồi quy tuyến tính đơn.
@@ -28,7 +35,14 @@ linear_regression <- function(x, y, silent = FALSE) {
     printf("Hệ số tự do: %.4f", result$coefficients[1])
     printf("Hệ số ứng với x: %.4f", result$coefficients[2])
   }
-  invisible(list(a = result$coefficients[2], b = result$coefficients[1]))
+  invisible(list(
+    input_data = list(
+      x = x, y = y
+    ),
+    output_data = list(
+      a = result$coefficients[2], b = result$coefficients[1]
+    )
+  ))
 }
 
 #' Dự đoán giá trị cho bài toán hồi quy tuyến tính đơn.
@@ -47,7 +61,14 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
     printf("Value = %.2f", value)
     printf("Giá trị của Y là: %.4f", predict_value)
   }
-  invisible(predict_value)
+  invisible(list(
+    input_data = list(
+      x = x, y = y, value = value
+    ),
+    input_data = list(
+      predict_value = predict_value
+    )
+  ))
 }
 
 #' Tính các tổng hay dùng giữa x và y.
@@ -61,8 +82,20 @@ calculate_sum <- function (x, y, silent=FALSE) {
   sum_y2 <- sum(y*y)
   sum_xy <- sum(x*y)
   if(!silent) {
+    print("Input")
+    print_huxtable(t(data.frame(x = x, y = y)))
+    print("Output")
     print_huxtable(data.frame(sum_x = sum_x, sum_y = sum_y, sum_xy = sum_xy, sum_x2 = sum_x2, sum_y2 = sum_y2))
   }
+  invisible(list(
+    input_data = list(
+      x = x, y = y
+    ),
+    output_data = list(
+      sum_x = sum_x, sum_y = sum_y, sum_xy = sum_xy,
+      sum_x2 = sum_x2, sum_y2 = sum_y2
+    )
+  ))
   invisible(list(
     sum_x = sum_x,
     sum_y = sum_y,
