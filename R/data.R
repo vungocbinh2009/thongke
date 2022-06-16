@@ -20,7 +20,7 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
       n = n, mean = mean, sd = sd,
       min = min, max = max, round_digits = round_digits
     ),
-    input_data = list(
+    output_data = list(
       data = data
     )
   ))
