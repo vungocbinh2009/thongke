@@ -5,7 +5,8 @@ Authors@R:
     person("Vu Ngọc", "Bình", , "vungocbinh@protonmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "no Id"))
 Description: Một gói lệnh thống kê đơn giản và dễ hiểu.
-Imports: truncnorm
+Imports: truncnorm, huxtable
+Suggests: crayon
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true

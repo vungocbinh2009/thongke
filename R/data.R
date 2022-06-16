@@ -8,9 +8,12 @@
 data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, silent=FALSE) {
   data <- rtruncnorm(n, a=min, b=max, mean, sd)
   data <- round(data, digits = round_digits)
-  df <- data.frame(data1 = data)
   if(!silent) {
-    print(table(df$data1))
+    print("Bài toán: Sinh dữ liệu theo phân bố chuẩn")
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, sd = sd, min = min, max = max, round_digits = round_digits))
+    print("Output")
+    print_huxtable(t(as.data.frame(table(data))))
   }
   invisible(data)
 }
@@ -30,7 +33,11 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
   df$data.cut <- cut(df$data, breaks=cut_vector)
   df$cal_data <- as.numeric(df$data.cut) * size + (min - size / 2)
   if(!silent) {
-    print(with(df, table(data.cut, useNA='ifany')))
+    print("Bài toán: Sinh dữ liệu ngẫu nhiên")
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, sd = sd, min = min, max = max, size = size))
+    print("Output")
+    print_huxtable(t(with(df, table(data.cut, useNA='ifany'))))
   }
   invisible(df$cal_data)
 }
@@ -58,7 +65,16 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
   df <- data.frame(x = x, y = y)
   df <- df[order(x),]
   if(!silent) {
-    print(df)
+    print("Bài toán: Sinh dữ liệu cho bài toán hồi quy tuyến tính đơn")
+    print("Input")
+    print_huxtable(
+      data.frame(
+        n = n, min_x = min_x, max_x = max_x,
+        b0 = b0, b1 = b1, sd_eps = sd_eps, round_digits = round_digits
+      )
+    )
+    print("Output")
+    print_huxtable(df)
   }
   invisible(list(x = x, y = y))
 }
@@ -70,9 +86,13 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
 data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
   size <- sum(expected)
   data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
-  freq <- as.integer(table(data))
+  freq <- table(data)
   if(!silent) {
-    print(freq)
+    print("Bài toán: Sinh dữ liệu cho bài toán kiểm định khi bình phương")
+    print("Input")
+    print_huxtable(t(expected))
+    print("Output")
+    print_huxtable(t(freq))
   }
   invisible(freq)
 }
@@ -85,10 +105,14 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE)
   expected <- c(expected_m_i, expected_l_i)
   size <- sum(expected)
   data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
-  freq <- as.integer(table(data))
+  freq <- table(data)
   matrix <- matrix(freq, nrow = 2, ncol = length(expected_m_i), byrow = TRUE)
   if(!silent) {
-    print(matrix)
+    print("Bài toán: Sinh dữ liệu cho bài toán kiểm định k tỷ lệ")
+    print("Input")
+    print_huxtable(t(data.frame(expected_m_i = expected_m_i, expected_l_i = expected_l_i)))
+    print("Output")
+    print_huxtable(matrix)
   }
   invisible(matrix)
 }
@@ -101,11 +125,15 @@ data_simulate_test_independent <- function (expected_matrix, silent=FALSE) {
   vector <- as.vector(expected_matrix)
   size <- sum(vector)
   data <- sample(seq_along(vector), size, prob = vector, replace = TRUE)
-  freq <- as.integer(table(data))
+  freq <- table(data)
   matrix <- matrix(freq, nrow=dim(expected_matrix)[1],
                    ncol = dim(expected_matrix)[2], byrow = FALSE)
   if(!silent) {
-    print(matrix)
+    print("Bài toán: Sinh dữ liệu cho bài toán kiểm định tính độc lập")
+    print("Input")
+    print_huxtable(expected_matrix)
+    print("Output")
+    print_huxtable(matrix)
   }
   invisible(matrix)
 }

@@ -21,8 +21,10 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, mode="neq", silent = F
   }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố chuẩn)")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, mean_0 = mean_0, sigma = sigma, alpha = alpha, mode = mode))
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
   invisible(list(test = test, c = c, rejected = rejected))
@@ -51,8 +53,10 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, mode="neq", silent = FALSE) {
   }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho giá trị trung bình (phân bố Student)")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, mean_0 = mean_0, s = s, alpha = alpha, mode = mode))
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
   invisible(list(test = test, c = c, rejected = rejected))
@@ -87,8 +91,10 @@ test_prop <- function(n, f, p_0, alpha, mode="neq", silent = FALSE) {
   }
   if(!silent) {
     print("Bài toán: Kiểm định giả thiết cho tỷ lệ")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = n, f = f, p_0 = p_0, alpha = alpha, mode = mode))
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
   invisible(list(test = test, c = c, rejected = rejected))
@@ -105,8 +111,11 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
   c <- qchisq(1 - alpha, df=length(actual)-1)
   if(!silent) {
     print("Bài toán: Kiểm định khi bình phương (kiểm định cho k tỷ lệ)")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(t(data.frame(actual = actual, expected = expected)))
+    printf("alpha = %.2f", alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
   invisible(list(test = test, c = c, rejected = abs(test) > c))
@@ -135,8 +144,11 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, mode="
   }
   if(!silent) {
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố chuẩn)")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = c(n1, n2), mean = c(mean1, mean2), sigma = c(sigma1, sigma2)))
+    printf("mode = %s, alpha = %.2f", mode, alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
 
@@ -167,8 +179,11 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, mode="neq", silen
   }
   if(!silent) {
     print("Bài toán: So sánh 2 giá trị trung bình (phân bố Student)")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = c(n1, n2), mean = c(mean1, mean2), s = c(s1, s2)))
+    printf("mode = %s, alpha = %.2f", mode, alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
   invisible(list(test = test, c = c, s = s, rejected = rejected))
@@ -204,8 +219,11 @@ test_2_prop <- function(n1, n2, f1, f2, alpha, mode="neq", silent = FALSE) {
   }
   if(!silent) {
     print("Bài toán: So sánh 2 tỷ lệ")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(data.frame(n = c(n1, n2), f = c(f1, f2)))
+    printf("mode = %s, alpha = %.2f", mode, alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(rejected)
   }
   invisible(list(test = test, c = c, f = f, rejected = rejected))
@@ -232,9 +250,12 @@ test_k_prop <- function (m_i, n_i, alpha, silent = FALSE) {
   test <- (sum_n_i * sum_n_i) / (sum_m_i * sum_l_i) * sum(m_i * m_i / n_i) - sum_n_i * sum_m_i / sum_l_i
   c <- qchisq(1 - alpha, df=length(m_i) - 1)
   if(!silent) {
-    print("Bài toán: So sánh n tỷ lệ")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Bài toán: So sánh k tỷ lệ")
+    print("Input")
+    print_huxtable(t(data.frame(m_i = m_i, n_i = n_i)))
+    printf("alpha = %.2f", alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
   invisible(list(test = test, c = c, rejected = abs(test) > c, sum_n_i = sum_n_i,
@@ -270,8 +291,11 @@ test_independent <- function(matrix, alpha, silent = FALSE) {
   c <- qchisq(1 - alpha, df=degree)
   if(!silent) {
     print("Bài toán: Kiểm định tính độc lập")
-    printf("Kết quả test thống kê: %.4f", test)
-    printf("Kết quả của c: %.4f", c)
+    print("Input")
+    print_huxtable(matrix)
+    printf("alpha = %.2f", alpha)
+    print("Output")
+    print_huxtable(data.frame(T = test, c = c))
     print_test_result(abs(test) > c)
   }
   invisible(list(test = test, c = c, rejected = abs(test) > c,

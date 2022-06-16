@@ -3,6 +3,7 @@
 #' Hàm này dùng để tính ước lượng khoảng cho giá trị trung bình, dùng phân bố chuẩn tắc
 #' Hàm trả về các giá trị z_alpha, z_alpha_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' mode có 3 chế độ: two_side, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
+#' @import huxtable
 #' @export
 estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two_side", silent = FALSE) {
   z_alpha_2 <- qnorm(1-alpha/2)
@@ -15,6 +16,9 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, mode="two_side", silent = 
   max <- mean + eps
   if (!silent) {
     print("Bài toán: Ước lượng khoảng cho trung bình (phân bố chuẩn)")
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, sigma = sigma, alpha = alpha, mode = mode))
+    print("Output")
     if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (mode == "min") {
@@ -45,6 +49,9 @@ estimate_mean_t <- function(n, mean, s, alpha, mode = "two_side", silent = FALSE
   max <- mean + eps
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho trung bình (phân bố Student)")
+    print("Input")
+    print_huxtable(data.frame(n = n, mean = mean, s = s, alpha = alpha, mode = mode))
+    print("Output")
     if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (mode == "max") {
@@ -75,6 +82,9 @@ estimate_var <- function(n, s, alpha, mode = "two_side", silent = FALSE) {
   max <- (n-1) * s * s / chi_sq_1
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho phương sai")
+    print("Input")
+    print_huxtable(data.frame(n = n, s = s, alpha = alpha, mode = mode))
+    print("Output")
     if (mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if (mode == "max") {
@@ -113,6 +123,9 @@ estimate_prop <- function(n, f, alpha, mode = "two_side", silent = FALSE) {
   max <- f + eps
   if(!silent) {
     print("Bài toán: Ước lượng khoảng cho tỷ lệ")
+    print("Input")
+    print_huxtable(data.frame(n = n, f = f, alpha = alpha, mode = mode))
+    print("Output")
     if(mode == "two.side" | mode == "two_side") {
       printf("Khoảng tin cậy hai phía là: (%.4f; %.4f)", bottom, top)
     } else if(mode == "max") {
@@ -136,6 +149,9 @@ sample_size_mean <- function(sigma, eps, alpha, silent = FALSE) {
   value <- (sigma*z_alpha / eps) * (sigma*z_alpha / eps)
   if(!silent) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng trung bình)")
+    print("Input")
+    print_huxtable(data.frame(sigma = sigma, eps = eps, alpha = alpha))
+    print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
   invisible(list(z_alpha = z_alpha, value = value))
@@ -151,6 +167,9 @@ sample_size_prop_1 <- function(f, eps, alpha, silent = FALSE) {
   value <- z_alpha*z_alpha * f*(1 - f) / (eps*eps)
   if(!silent) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, đã biết f)")
+    print("Input")
+    print_huxtable(data.frame(f = f, eps = eps, alpha = alpha))
+    print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
   invisible(list(z_alpha = z_alpha, value = value))
@@ -166,6 +185,9 @@ sample_size_prop_2 <- function(eps, alpha, silent = FALSE) {
   value <- z_alpha*z_alpha / (4*eps*eps)
   if(!silent) {
     print("Bài toán: Xác định kích thước mẫu (ước lượng tỷ lệ, chưa biết f)")
+    print("Input")
+    print_huxtable(data.frame(eps = eps, alpha = alpha))
+    print("Output")
     printf("Kích thước mẫu tối thiểu: %.4f", value)
   }
   invisible(list(z_alpha = z_alpha, value = value))

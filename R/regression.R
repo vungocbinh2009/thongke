@@ -6,6 +6,8 @@ correlation <- function(x, y, silent = FALSE) {
   cor <- cor(x, y, method = "pearson")
   if(!silent) {
     print("Bài toán: Tính hệ số tương quan")
+    print("Input")
+    str(data.frame(x, y))
     printf("Hệ số tương quan: %.4f", cor)
   }
   invisible(cor)
@@ -21,6 +23,8 @@ linear_regression <- function(x, y, silent = FALSE) {
   result <- lm(Y ~ X, data = df)
   if(!silent) {
     print("Bài toán: Bài toán hồi quy tuyến tính đơn")
+    print("Input")
+    str(data.frame(x, y))
     printf("Hệ số tự do: %.4f", result$coefficients[1])
     printf("Hệ số ứng với x: %.4f", result$coefficients[2])
   }
@@ -38,6 +42,9 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
   predict_value <- result$coefficients[1] + value * result$coefficients[2]
   if(!silent) {
     printf("Bài toán: Dự báo giá trị, dựa vào hồi quy tuyến tính đơn")
+    print("Input")
+    str(data.frame(x, y))
+    printf("Value = %.2f", value)
     printf("Giá trị của Y là: %.4f", predict_value)
   }
   invisible(predict_value)
@@ -54,11 +61,7 @@ calculate_sum <- function (x, y, silent=FALSE) {
   sum_y2 <- sum(y*y)
   sum_xy <- sum(x*y)
   if(!silent) {
-    printf("Tổng x: %.4f", sum_x)
-    printf("Tổng y: %.4f", sum_y)
-    printf("Tổng xy: %.4f", sum_xy)
-    printf("Tổng x2: %.4f", sum_x2)
-    printf("Tổng y2: %.4f", sum_y2)
+    print_huxtable(data.frame(sum_x = sum_x, sum_y = sum_y, sum_xy = sum_xy, sum_x2 = sum_x2, sum_y2 = sum_y2))
   }
   invisible(list(
     sum_x = sum_x,
