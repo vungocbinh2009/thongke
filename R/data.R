@@ -74,7 +74,7 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
       )
     )
     print("Output")
-    print_huxtable(df)
+    print_huxtable(t(df))
   }
   invisible(list(x = x, y = y))
 }
