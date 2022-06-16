@@ -17,7 +17,7 @@ get_alpha <- function(z_alpha, two_side = TRUE) {
 }
 
 #' Hàm này dùng để tạo và in bảng dataframe, sử dụng huxtable.
-#'@import huxtable
+#' @import huxtable
 print_huxtable <- function(df) {
   hux_output <- as_hux(df)
   hux_output <- set_all_borders(hux_output)
