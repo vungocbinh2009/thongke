@@ -65,7 +65,7 @@ linear_regression_predict <- function(x, y, value, silent = FALSE) {
     input_data = list(
       x = x, y = y, value = value
     ),
-    input_data = list(
+    output_data = list(
       predict_value = predict_value
     )
   ))
