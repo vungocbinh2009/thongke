@@ -12,12 +12,12 @@ test_2_mean_t(
   s1,
   s2,
   alpha,
-  mode = "neq",
+  alternative = "neq",
   silent = FALSE
 )
 }
 \description{
 Hàm này so sánh 2 giá trị trung bình (dùng phân bố Student)
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s
 }

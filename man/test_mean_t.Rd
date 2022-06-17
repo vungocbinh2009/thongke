@@ -4,10 +4,10 @@
 \alias{test_mean_t}
 \title{Kiểm định giả thiết về giá trị trung bình (phân bố Student)}
 \usage{
-test_mean_t(n, mean, mean_0, s, alpha, mode = "neq", silent = FALSE)
+test_mean_t(n, mean, mean_0, s, alpha, alternative = "neq", silent = FALSE)
 }
 \description{
 Hàm này kiểm định giả thiết về gái trị trung bình, dùng phân bố student
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 Hàm trả về kết quả của test thống kê (test) và giá trị c
 }

@@ -4,10 +4,10 @@
 \alias{test_2_prop}
 \title{Kiểm định giả thiết: So sánh 2 tỷ lệ.}
 \usage{
-test_2_prop(n1, n2, f1, f2, alpha, mode = "neq", silent = FALSE)
+test_2_prop(n1, n2, f1, f2, alpha, alternative = "neq", silent = FALSE)
 }
 \description{
 Hàm này thực hiện so sánh 2 tỷ lệ
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 Hàm trả về kết quả của test thống kê (test) và giá trị c và tỷ lệ chung f
 }

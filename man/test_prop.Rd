@@ -4,10 +4,10 @@
 \alias{test_prop}
 \title{Kiểm định giả thiết về xác suất.}
 \usage{
-test_prop(n, f, p_0, alpha, mode = "neq", silent = FALSE)
+test_prop(n, f, p_0, alpha, alternative = "neq", silent = FALSE)
 }
 \description{
 Hàm này kiểm định giả thiết về xác suất
-Tham số mode là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
+Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 Hàm trả về kết quả của test thống kê (test) và giá trị c
 }
