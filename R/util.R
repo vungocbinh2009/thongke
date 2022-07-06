@@ -20,7 +20,7 @@ get_alpha <- function(z_alpha, two_side = TRUE) {
 #' @import huxtable
 print_huxtable <- function(df) {
   hux_output <- as_hux(df)
-  hux_output <- set_all_borders(hux_output)
+  hux_output <- theme_compact(hux_output)
   # Làm tròn số đến 4 chữ số thập phân
   number_format(hux_output) <- "%.9g"
   print_screen(hux_output, colnames = FALSE)
