@@ -13,7 +13,7 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
     print("Input")
     print_huxtable(data.frame(n = n, mean = mean, sd = sd, min = min, max = max, round_digits = round_digits))
     print("Output")
-    print_huxtable(t(as.data.frame(table(data))))
+    print_huxtable(as.data.frame(table(data)))
   }
   invisible(list(
     input_data = list(
@@ -45,7 +45,7 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
     print("Input")
     print_huxtable(data.frame(n = n, mean = mean, sd = sd, min = min, max = max, size = size))
     print("Output")
-    print_huxtable(t(with(df, table(data.cut, useNA='ifany'))))
+    print_huxtable(with(df, table(data.cut, useNA='ifany')))
   }
   invisible(list(
     input_data = list(
@@ -89,7 +89,7 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
       )
     )
     print("Output")
-    print_huxtable(t(df))
+    print_huxtable(df)
   }
   invisible(list(
     input_data = list(
@@ -115,7 +115,7 @@ data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
     print("Input")
     print_huxtable(t(expected))
     print("Output")
-    print_huxtable(t(freq))
+    print_huxtable(freq)
   }
   invisible(list(
     input_data = list(
