@@ -96,11 +96,4 @@ calculate_sum <- function (x, y, silent=FALSE) {
       sum_x2 = sum_x2, sum_y2 = sum_y2
     )
   ))
-  invisible(list(
-    sum_x = sum_x,
-    sum_y = sum_y,
-    sum_xy = sum_xy,
-    sum_x2 = sum_x2,
-    sum_y2 = sum_y2
-  ))
 }
