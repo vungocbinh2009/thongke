@@ -5,7 +5,7 @@
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
-data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, silent=FALSE) {
+data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, silent=FALSE, simplify = FALSE) {
   data <- rtruncnorm(n, a=min, b=max, mean, sd)
   data <- round(data, digits = round_digits)
   if(!silent) {
@@ -15,15 +15,20 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
     print("Output")
     print_huxtable(as.data.frame(table(data)))
   }
-  invisible(list(
-    input_data = list(
-      n = n, mean = mean, sd = sd,
-      min = min, max = max, round_digits = round_digits
-    ),
-    output_data = list(
-      data = data
-    )
-  ))
+  if(simplify) {
+    invisible(data)
+  } else {
+    invisible(list(
+      input_data = list(
+        n = n, mean = mean, sd = sd,
+        min = min, max = max, round_digits = round_digits
+      ),
+      output_data = list(
+        data = data
+      )
+    ))
+  }
+
 }
 
 #' Tạo dữ liệu liên tục.
@@ -34,7 +39,7 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
 #' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
 #' @export
 #' @importFrom truncnorm rtruncnorm
-data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) {
+data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE, simplify = FALSE) {
   data <- rtruncnorm(n, a=min, b=max, mean, sd)
   df <- data.frame(data = data)
   cut_vector <- get_cut_vector(min, max, size)
@@ -47,14 +52,18 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
     print("Output")
     print_huxtable(with(df, table(data.cut, useNA='ifany')))
   }
-  invisible(list(
-    input_data = list(
-      n = n, mean = mean, sd = sd, min = min, max = max, size = size
-    ),
-    output_data = list(
-      data = df$cal_data
-    )
-  ))
+  if(simplify) {
+    invisible(df$cal_data)
+  } else {
+    invisible(list(
+      input_data = list(
+        n = n, mean = mean, sd = sd, min = min, max = max, size = size
+      ),
+      output_data = list(
+        data = df$cal_data
+      )
+    ))
+  }
 }
 
 #' Tạo dữ liệu cho bài toán hồi quy tuyến tính
@@ -63,7 +72,7 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE) 
 #' Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
 #' Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y
 #' @export
-data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits, silent=FALSE) {
+data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits, silent=FALSE, simplify = FALSE) {
   # Tạo ngẫu nhiên dữ liệu cho các biến x_1, x_2
   x <- runif(n, min_x, max_x)
 
@@ -91,22 +100,28 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
     print("Output")
     print_huxtable(df)
   }
-  invisible(list(
-    input_data = list(
-      n = n, min_x = min_x, max_x = max_x,
-      b0 = b0, b1 = b1, sd_eps = sd_eps, round_digits = round_digits
-    ),
-    output_data = list(
+  if(simplify) {
+    invisible(list(
       x = x, y = y
-    )
-  ))
+    ))
+  } else {
+    invisible(list(
+      input_data = list(
+        n = n, min_x = min_x, max_x = max_x,
+        b0 = b0, b1 = b1, sd_eps = sd_eps, round_digits = round_digits
+      ),
+      output_data = list(
+        x = x, y = y
+      )
+    ))
+  }
 }
 
 #' Dữ liệu cho bài toán kiểm định khi bình phương.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ
 #' @export
-data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
+data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE, simplify = FALSE) {
   size <- sum(expected)
   data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
   freq <- table(data)
@@ -117,21 +132,25 @@ data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE) {
     print("Output")
     print_huxtable(freq)
   }
-  invisible(list(
-    input_data = list(
-      expected = expected
-    ),
-    output_data = list(
-      freq = freq
-    )
-  ))
+  if(simplify) {
+    invisible(freq)
+  } else {
+    invisible(list(
+      input_data = list(
+        expected = expected
+      ),
+      output_data = list(
+        freq = freq
+      )
+    ))
+  }
 }
 
 #' Dữ liệu cho bài toán kiểm định k tỷ lệ.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ
 #' @export
-data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE) {
+data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE, simplify = FALSE) {
   expected <- c(expected_m_i, expected_l_i)
   size <- sum(expected)
   data <- sample(seq_along(expected), size, prob = expected, replace = TRUE)
@@ -144,21 +163,25 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE)
     print("Output")
     print_huxtable(matrix)
   }
-  invisible(list(
-    input_data = list(
-      expected_m_i = expected_m_i, expected_l_i = expected_l_i
-    ),
-    output_data = list(
-      matrix = matrix
-    )
-  ))
+  if(simplify) {
+    invisible(matrix)
+  } else {
+    invisible(list(
+      input_data = list(
+        expected_m_i = expected_m_i, expected_l_i = expected_l_i
+      ),
+      output_data = list(
+        matrix = matrix
+      )
+    ))
+  }
 }
 
 #' Dữ liệu cho bài toán kiểm định tính độc lập.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
 #' @export
-data_simulate_test_independent <- function (expected_matrix, silent=FALSE) {
+data_simulate_test_independent <- function (expected_matrix, silent=FALSE, simplify = FALSE) {
   vector <- as.vector(expected_matrix)
   size <- sum(vector)
   data <- sample(seq_along(vector), size, prob = vector, replace = TRUE)
@@ -172,14 +195,18 @@ data_simulate_test_independent <- function (expected_matrix, silent=FALSE) {
     print("Output")
     print_huxtable(matrix)
   }
-  invisible(list(
-    input_data = list(
-      expected_matrix = expected_matrix
-    ),
-    output_data = list(
-      matrix = matrix
-    )
-  ))
+  if(simplify) {
+    invisible(matrix)
+  } else {
+    invisible(list(
+      input_data = list(
+        expected_matrix = expected_matrix
+      ),
+      output_data = list(
+        matrix = matrix
+      )
+    ))
+  }
 }
 
 #' Hàm này xây dựng cut_vector cho hàm data_simulate_regression

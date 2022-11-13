@@ -26,6 +26,7 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_sided", s
       printf("Khoảng tin cậy lớn nhất là: (-inf; %.4f)", max)
     }
   }
+
   invisible(list(
     input_data = list(
       n = n, mean = mean, sigma = sigma,
