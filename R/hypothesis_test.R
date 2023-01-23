@@ -4,7 +4,10 @@
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
+#' @importFrom checkmate assert_choice
 test_mean_norm <- function(n, mean, mean_0, sigma, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   test <- (mean - mean_0) * sqrt(n) / sigma
   c <- switch(
     alternative,
@@ -48,7 +51,10 @@ test_mean_norm <- function(n, mean, mean_0, sigma, alpha, alternative="neq", sil
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
+#' @importFrom checkmate assert_choice
 test_mean_t <- function(n, mean, mean_0, s, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   test <- (mean - mean_0) * sqrt(n) / s
   c <- switch(
     alternative,
@@ -87,7 +93,10 @@ test_mean_t <- function(n, mean, mean_0, s, alpha, alternative="neq", silent = F
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
+#' @importFrom checkmate assert_choice
 test_prop <- function(n, f, p_0, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   if(!check_test_prop(n, p_0)) {
     if(!silent) {
       print("Không đủ điều kiện áp dụng test thống kê")
@@ -160,7 +169,10 @@ test_goodness_of_fit <- function (actual, expected, alpha, silent = FALSE) {
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c
 #' @export
+#' @importFrom checkmate assert_choice
 test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   test <- (mean1 - mean2) / sqrt(sigma1*sigma1/n1 + sigma2*sigma2/n2)
   c <- switch(
     alternative,
@@ -200,7 +212,10 @@ test_2_mean_norm <- function(n1, n2, mean1, mean2, sigma1, sigma2, alpha, altern
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test), giá trị c và phương sai chung s
 #' @export
+#' @importFrom checkmate assert_choice
 test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   s_squared <- ((n1-1)*s1*s1 + (n2-1)*s2*s2) / (n1+n2-2)
   test <- (mean1 - mean2) / (sqrt(s_squared) * sqrt(1/n1 + 1/n2))
   c <- switch(
@@ -241,7 +256,10 @@ test_2_mean_t <- function(n1, n2, mean1, mean2, s1, s2, alpha, alternative="neq"
 #' Tham số alternative là 1 trong 3 giá trị: neq, less, greater tương ứng với 3 đối thiết.
 #' Hàm trả về kết quả của test thống kê (test) và giá trị c và tỷ lệ chung f
 #' @export
+#' @importFrom checkmate assert_choice
 test_2_prop <- function(n1, n2, f1, f2, alpha, alternative="neq", silent = FALSE) {
+  assert_choice(alternative, c("neq", "less", "greater"))
+
   if(!check_test_2_prop(n1, n2, f1, f2)) {
     if(!silent) {
       print("Không đủ điều kiện áp dụng test thống kê")

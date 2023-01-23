@@ -4,7 +4,7 @@
 \alias{data_simulate_test_goodness_of_fit}
 \title{Dữ liệu cho bài toán kiểm định khi bình phương.}
 \usage{
-data_simulate_test_goodness_of_fit(expected, silent = FALSE)
+data_simulate_test_goodness_of_fit(expected, silent = FALSE, simplify = FALSE)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ

@@ -4,7 +4,12 @@
 \alias{data_simulate_test_k_prop}
 \title{Dữ liệu cho bài toán kiểm định k tỷ lệ.}
 \usage{
-data_simulate_test_k_prop(expected_m_i, expected_l_i, silent = FALSE)
+data_simulate_test_k_prop(
+  expected_m_i,
+  expected_l_i,
+  silent = FALSE,
+  simplify = FALSE
+)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ

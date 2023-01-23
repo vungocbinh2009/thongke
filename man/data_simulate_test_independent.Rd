@@ -4,7 +4,11 @@
 \alias{data_simulate_test_independent}
 \title{Dữ liệu cho bài toán kiểm định tính độc lập.}
 \usage{
-data_simulate_test_independent(expected_matrix, silent = FALSE)
+data_simulate_test_independent(
+  expected_matrix,
+  silent = FALSE,
+  simplify = FALSE
+)
 }
 \description{
 Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập

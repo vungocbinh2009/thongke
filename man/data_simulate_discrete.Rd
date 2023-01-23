@@ -4,7 +4,16 @@
 \alias{data_simulate_discrete}
 \title{Tạo dữ liệu rời rạc.}
 \usage{
-data_simulate_discrete(n, mean, sd, min, max, round_digits = 0, silent = FALSE)
+data_simulate_discrete(
+  n,
+  mean,
+  sd,
+  min,
+  max,
+  round_digits = 0,
+  silent = FALSE,
+  simplify = FALSE
+)
 }
 \description{
 Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max

@@ -12,7 +12,8 @@ data_simulate_regression(
   b1,
   sd_eps,
   round_digits,
-  silent = FALSE
+  silent = FALSE,
+  simplify = FALSE
 )
 }
 \description{

@@ -4,7 +4,16 @@
 \alias{data_simulate_continuous}
 \title{Tạo dữ liệu liên tục.}
 \usage{
-data_simulate_continuous(n, mean, sd, min, max, size, silent = FALSE)
+data_simulate_continuous(
+  n,
+  mean,
+  sd,
+  min,
+  max,
+  size,
+  silent = FALSE,
+  simplify = FALSE
+)
 }
 \description{
 Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max

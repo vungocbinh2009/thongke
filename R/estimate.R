@@ -4,7 +4,10 @@
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
+#' @importFrom checkmate assert_choice
 estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_sided", silent = FALSE) {
+  assert_choice(alternative, c("two_sided", "min", "max"))
+
   z_alpha_div_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
   eps_2 <- z_alpha_div_2 * sigma / sqrt(n)
@@ -46,7 +49,10 @@ estimate_mean_norm <- function(n, mean, sigma, alpha, alternative="two_sided", s
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
+#' @importFrom checkmate assert_choice
 estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_sided", silent = FALSE) {
+  assert_choice(alternative, c("two_sided", "min", "max"))
+
   t_alpha_div_2 <- qt(1 - alpha/2,df = n - 1)
   t_alpha <- qt(1-alpha, df = n - 1)
   eps_2 <- t_alpha_div_2 * s / sqrt(n)
@@ -87,7 +93,10 @@ estimate_mean_t <- function(n, mean, s, alpha, alternative = "two_sided", silent
 #' Hàm trả về các giá trị chi_sq_1, chi_sq_2, chi_sq_1_2 (chisq(1-a/2)), chi_sq_2_2 (chisq(a/2)), bottom, top, min, max.
 #' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
+#' @importFrom checkmate assert_choice
 estimate_var <- function(n, s, alpha, alternative = "two_sided", silent = FALSE) {
+  assert_choice(alternative, c("two_sided", "min", "max"))
+
   chi_sq_2_div_2 <- qchisq(alpha / 2, df=n-1)
   chi_sq_1_div_2 <- qchisq(1 - alpha / 2, df=n-1)
   chi_sq_2 <- qchisq(alpha, df=n-1)
@@ -128,6 +137,7 @@ estimate_var <- function(n, s, alpha, alternative = "two_sided", silent = FALSE)
 #' Hàm trả về các giá trị z_alpha, z_alpha_div_2 (z_alpha/2), bottom, top (khoảng tin cậy 2 phía), min (khoảng tin cậy nhỏ nhất), max (khoảng tin cậy lớn nhất)
 #' alternative có 3 chế độ: two_sided, min và max tương ứng với khoảng tin cậy hai phía, lớn nhất và nhả nhất
 #' @export
+#' @importFrom checkmate assert_choice
 estimate_prop <- function(n, f, alpha, alternative = "two_sided", silent = FALSE) {
   if(!check_estimate_prop(n, f)) {
     if(!silent) {
@@ -135,6 +145,7 @@ estimate_prop <- function(n, f, alpha, alternative = "two_sided", silent = FALSE
     }
     return()
   }
+  assert_choice(alternative, c("two_sided", "min", "max"))
 
   z_alpha_div_2 <- qnorm(1-alpha/2)
   z_alpha <- qnorm(1-alpha)
