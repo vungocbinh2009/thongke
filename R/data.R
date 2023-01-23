@@ -1,8 +1,15 @@
-#' Tạo dữ liệu rời rạc.
+#' Sinh dữ liệu rời rạc.
 #'
-#' Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
+#' Hàm này sinh dữ liệu giả theo phân bố chuẩn từ min đến max
 #' Hàm sẽ in ra bảng phân bố tần số và trả về dữ liệu được hàm tạo ra.
-#' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
+#' Tham số simplify=TRUE cho phép đơn giản hóa kết quả hàm trả về, chỉ trả về vector dữ liệu.
+#' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng
+#' giá trị mean và sd truyền vào hàm
+#'
+#' @return Có 2 trường hợp:
+#' * Nếu simplify=FALSE, hàm trả về 1 list gồm input_data, chứa các tham số đã truyền vào,
+#' và output_data, có vector data là dữ liệu được sinh ra.
+#' * Nếu simplify=TRUE, hàm chỉ trả về vector dữ liệu được sinh ra.
 #' @export
 #' @importFrom truncnorm rtruncnorm
 data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, silent=FALSE, simplify = FALSE) {
@@ -31,12 +38,19 @@ data_simulate_discrete <- function(n, mean, sd, min, max, round_digits = 0, sile
 
 }
 
-#' Tạo dữ liệu liên tục.
+#' Sinh dữ liệu liên tục.
 #'
-#' Hàm này tạo dữ liệu giả theo phân bố chuẩn từ min đến max
+#' Hàm này sinh dữ liệu giả theo phân bố chuẩn từ min đến max
 #' Hàm sẽ in ra bảng phân bố tần số ghép lớp, theo các giá trị cut cho trước
 #' Hàm cũng trả về dữ liệu dưới dạng ghép lớp (điểm giữa của các khoảng)
-#' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd truyền vào hàm
+#' Tham số simplify=TRUE cho phép hàm trả về dữ liệu đơn giản hơn, nếu muốn.
+#' Lưu ý: dữ liệu chỉ cho giá trị mean và sd gần đúng và không bằng giá trị mean và sd
+#' truyền vào hàm
+#'
+#' @return Có 2 trường hợp.
+#' * Nếu simplify=FALSE, hàm trả về 1 list gồm input_data, chứa các tham số đã truyền vào,
+#' và output_data, có vector data là dữ liệu được sinh ra.
+#' * Nếu simplify=TRUE, hàm chỉ trả về vector dữ liệu được sinh ra.
 #' @export
 #' @importFrom truncnorm rtruncnorm
 data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE, simplify = FALSE) {
@@ -68,9 +82,16 @@ data_simulate_continuous <- function(n, mean, sd, min, max, size, silent=FALSE, 
 
 #' Tạo dữ liệu cho bài toán hồi quy tuyến tính
 #'
-#' Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn
-#' Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số hồi quy tuyến tính cuối cùng
-#' Hàm này trả về các giá trị x, y, có thể dùng dưới dạng data$x, data$y
+#' Hàm này tạo dữ liệu giả để xây dựng bài toán hồi quy tuyến tính đơn.
+#' Lưu ý: Các hệ số hồi quy tuyến tính truyền vào không phải các hệ số
+#' hồi quy tuyến tính cuối cùng.
+#' Hàm này trả về các vector x, y, có thể dùng dưới dạng data$x, data$y nếu sử dụng tham số
+#' simplify=TRUE
+#'
+#' @return Có 2 trường hợp:
+#' * Nếu simplify=FALSE, hàm trả về 1 list gồm input_data, chứa các tham số đã truyền vào,
+#' và output_data, gồm 2 vector là x và y.
+#' * Nếu simplify=TRUE, hàm chỉ trả về 1 list gồm 2 vector dữ liệu là x và y để sử dụng.
 #' @export
 data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digits, silent=FALSE, simplify = FALSE) {
   # Tạo ngẫu nhiên dữ liệu cho các biến x_1, x_2
@@ -120,6 +141,11 @@ data_simulate_regression <- function(n, min_x, max_x, b0, b1, sd_eps, round_digi
 #' Dữ liệu cho bài toán kiểm định khi bình phương.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định sự phù hợp của k tỷ lệ
+#'
+#' @return
+#' * Nếu simplify=FALSE, hàm trả về 1 list gồm input_data, chứa các tham số đã truyền vào,
+#' và output_data, có vector freq là dữ liệu được sinh ra.
+#' * Nếu simplify=TRUE, hàm chỉ trả về vector dữ liệu được sinh ra.
 #' @export
 data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE, simplify = FALSE) {
   size <- sum(expected)
@@ -149,6 +175,12 @@ data_simulate_test_goodness_of_fit <- function (expected, silent=FALSE, simplify
 #' Dữ liệu cho bài toán kiểm định k tỷ lệ.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán so sánh k tỷ lệ
+#'
+#' @return Có 2 trường hợp:
+#' * Nếu simplify=FALSE, hàm trả về input_data gồm các tham số đã nhập vào và output_data
+#' bao gồm 1 ma trận matrix là kết quả của hàm.
+#' * Nếu simplify=TRUE, hàm chỉ trả về ma trận dữ liệu.
+#'
 #' @export
 data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE, simplify = FALSE) {
   expected <- c(expected_m_i, expected_l_i)
@@ -180,6 +212,11 @@ data_simulate_test_k_prop <- function (expected_m_i, expected_l_i, silent=FALSE,
 #' Dữ liệu cho bài toán kiểm định tính độc lập.
 #'
 #' Hàm này dùng để tạo dữ liệu cho bài toán kiểm định tính độc lập
+#'
+#' @return Có 2 trường hợp:
+#' * Nếu simplify=FALSE, hàm trả về input_data gồm các tham số đã nhập vào và output_data
+#' bao gồm 1 ma trận matrix là kết quả của hàm.
+#' * Nếu simplify=TRUE, hàm chỉ trả về ma trận dữ liệu.
 #' @export
 data_simulate_test_independent <- function (expected_matrix, silent=FALSE, simplify = FALSE) {
   vector <- as.vector(expected_matrix)
