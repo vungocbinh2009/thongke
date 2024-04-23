@@ -12,6 +12,8 @@ Table of Contents
 Introduction
 ============
 
+![r-universe](https://r-lib.r-universe.dev/badges/thongke)
+
 A simple statistics package for students
 
 Why ?
@@ -25,7 +27,14 @@ Why ?
 Install
 =======
 
-``` r
+Using r-universe
+```{r, eval=FALSE}
+install.packages("thongke", repos = "https://vungocbinh2009.r-universe.dev")
+```
+
+
+Using devtools
+```{r, eval=FALSE}
 # Install devtools
 install.packages("devtools")
 # Install thongke
