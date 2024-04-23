@@ -12,7 +12,7 @@ Table of Contents
 Introduction
 ============
 
-![r-universe](https://r-lib.r-universe.dev/badges/thongke)
+![r-universe](https://vungocbinh2009.r-universe.dev/badges/thongke)
 
 A simple statistics package for students
 
